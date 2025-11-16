@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://c81o2vgj67swa"]
+
+[ext_resource type="Script" uid="uid://bf2pjr3qn8a6e" path="res://game_0/game1/spawn_1.gd" id="1_b0e3b"]
+[ext_resource type="Script" uid="uid://bbywnobiaurky" path="res://game_0/game1/spawn_2.gd" id="2_6jrx4"]
+
+[sub_resource type="GDScript" id="GDScript_a3bdt"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2414, 613, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jrx4"]
+
+[node name="game_1a" type="Node2D"]
+script = SubResource("GDScript_a3bdt")
+
+[node name="spawn1" type="Node2D" parent="."]
+script = ExtResource("1_b0e3b")
+
+[node name="SpawnArea1" type="Path2D" parent="spawn1"]
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="spawn1/SpawnArea1"]
+position = Vector2(2414, 613)
+rotation = 3.1415927
+
+[node name="spawn2" type="Node2D" parent="."]
+script = ExtResource("2_6jrx4")
+
+[node name="Sprite2D" type="Sprite2D" parent="spawn2"]
+position = Vector2(802, 169)
+
+[node name="SpawnArea1" type="Path2D" parent="spawn2"]
+position = Vector2(0, 280)
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="spawn2/SpawnArea1"]
+position = Vector2(2414, 613)
+rotation = 3.1415927
+
+[node name="Cursor" type="Area2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+position = Vector2(268.99997, 251.99998)
+scale = Vector2(-2.3793457, 102.19152)
+shape = SubResource("RectangleShape2D_6jrx4")

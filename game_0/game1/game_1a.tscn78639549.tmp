@@ -1,0 +1,327 @@
+[gd_scene load_steps=10 format=3 uid="uid://c81o2vgj67swa"]
+
+[ext_resource type="Script" uid="uid://bf2pjr3qn8a6e" path="res://game_0/game1/spawn_1.gd" id="1_b0e3b"]
+[ext_resource type="Texture2D" uid="uid://kgqeb8ol51vg" path="res://原始/a5c436a9c69a5972603cfd29c7936fa3.jpg" id="3_sx0ji"]
+[ext_resource type="Script" uid="uid://dhcylk1xphjk4" path="res://game_0/game1/display.gd" id="4_e1all"]
+[ext_resource type="Texture2D" uid="uid://c01n6p66kiimq" path="res://原始/7ef5764755167867644c83efb5af2fb0.jpg" id="4_xe0hg"]
+[ext_resource type="Texture2D" uid="uid://dtxlkd7osdwoc" path="res://原始/f55d8d5255fa57362e80c9482fbcf511.jpg" id="5_gy500"]
+
+[sub_resource type="GDScript" id="GDScript_a3bdt"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2414, 613, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_fvjhh"]
+script/source = "extends Node2D
+
+# 外部可调整参数
+@export var spawn_rate: float = 1.0  # 生成频率（秒）
+@export var min_speed: float = 50.0  # 最小移动速度
+@export var max_speed: float = 150.0 # 最大移动速度
+
+# 图组配置 - 在编辑器中设置多张不同的图像
+@export var icon_textures: Array[Texture2D] = []
+# 节点引用
+@onready var icon_container = $IconContainer
+@onready var spawn_timer = $Timer
+@onready var detection_area = $\"../Cursor\"
+@onready var display_node = $display  # 显示碰到图像的节点
+
+# 预加载场景
+var icon_scene = preload(\"res://game_0/game1/icon.tscn\")
+
+# 游戏状态
+var game_over = false
+var active_icons = []   # 存储当前活动的图标
+
+func _ready():
+	print(\"游戏初始化开始\")
+	
+	# 验证图组
+	_validate_icon_textures()
+	
+	# 设置生成计时器
+	spawn_timer.wait_time = spawn_rate
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	spawn_timer.start()
+	
+	print(\"生成计时器已启动，频率: \", spawn_rate, \" 秒\")
+	
+	# 连接检测区域的信号
+	if detection_area:
+		detection_area.body_entered.connect(_on_detection_area_body_entered)
+		print(\"检测区域信号已连接\")
+	else:
+		print(\"错误: 未找到检测区域节点\")
+
+func _validate_icon_textures():
+	\"\"\"验证图标纹理，如果没有设置则创建默认图组\"\"\"
+	if icon_textures.is_empty():
+		print(\"警告：没有设置图标纹理，创建默认图组\")
+		_create_default_textures()
+	else:
+		print(\"已加载图组，包含 \", icon_textures.size(), \" 张不同的图像\")
+
+func _create_default_textures():
+	\"\"\"创建默认的多张不同图像图组\"\"\"
+	var shapes = [\"circle\", \"square\", \"triangle\", \"diamond\", \"star\"]
+	var colors = [
+		Color.BLUE, Color.GREEN, Color.YELLOW, 
+		Color.PURPLE, Color.CYAN, Color.ORANGE
+	]
+	
+	for i in range(6):  # 创建6张不同的图像
+		var image = Image.create(64, 64, false, Image.FORMAT_RGBA8)
+		var color = colors[i % colors.size()]
+		
+		# 绘制不同形状
+		_draw_shape(image, shapes[i % shapes.size()], color)
+		
+		var texture = ImageTexture.create_from_image(image)
+		icon_textures.append(texture)
+	
+	print(\"已创建 \", icon_textures.size(), \" 张默认图像\")
+
+func _draw_shape(image: Image, shape: String, color: Color):
+	\"\"\"在图像上绘制不同形状\"\"\"
+	image.fill(Color.TRANSPARENT)
+	
+	match shape:
+		\"circle\":
+			# 绘制圆形
+			var center = Vector2(32, 32)
+			var radius = 28
+			for x in range(64):
+				for y in range(64):
+					var pos = Vector2(x, y)
+					if pos.distance_to(center) <= radius:
+						image.set_pixel(x, y, color)
+		
+		\"square\":
+			# 绘制正方形
+			var rect = Rect2(10, 10, 44, 44)
+			for x in range(64):
+				for y in range(64):
+					if rect.has_point(Vector2(x, y)):
+						image.set_pixel(x, y, color)
+		
+		\"triangle\":
+			# 绘制三角形
+			for x in range(64):
+				for y in range(64):
+					if y > 10 and x > y - 32 and x < 96 - y:
+						image.set_pixel(x, y, color)
+		
+		\"diamond\":
+			# 绘制菱形
+			for x in range(64):
+				for y in range(64):
+					var dx = abs(x - 32)
+					var dy = abs(y - 32)
+					if dx + dy < 28:
+						image.set_pixel(x, y, color)
+		
+		\"star\":
+			# 绘制星形
+			for x in range(64):
+				for y in range(64):
+					var angle = atan2(y - 32, x - 32)
+					var distance = Vector2(x - 32, y - 32).length()
+					var star_distance = 25 + 10 * sin(angle * 5)
+					if distance < star_distance:
+						image.set_pixel(x, y, color)
+
+func _on_spawn_timer_timeout():
+	\"\"\"生成新图标\"\"\"
+	if game_over:
+		return
+	
+	print(\"生成新图标\")
+	
+	# 创建新图标实例
+	var new_icon = icon_scene.instantiate()
+	
+	if not icon_container:
+		print(\"错误: 未找到图标容器\")
+		return
+		
+	icon_container.add_child(new_icon)
+	
+	# 设置初始位置（屏幕右侧外部）
+	var viewport_size = get_viewport_rect().size
+	new_icon.global_position = Vector2(viewport_size.x + 100, randf_range(100, viewport_size.y - 100))
+	
+	# 随机选择纹理
+	var random_texture = icon_textures[randi() % icon_textures.size()]
+	
+	# 随机决定是否为红色图标（25%概率）
+	var is_red_icon = randf() < 0.25
+	
+	print(\"生成图标 - 位置: \", new_icon.global_position, \" 红色: \", is_red_icon)
+	
+	# 初始化图标
+	if new_icon.has_method(\"initialize\"):
+		new_icon.initialize(random_texture, is_red_icon, randf_range(min_speed, max_speed))
+	else:
+		print(\"错误: 图标节点没有 initialize 方法\")
+	
+	# 连接信号
+	if new_icon.has_signal(\"icon_clicked\"):
+		new_icon.icon_clicked.connect(_on_icon_clicked)
+	else:
+		print(\"警告: 图标节点没有 icon_clicked 信号\")
+		
+	if new_icon.has_signal(\"icon_exited_screen\"):
+		new_icon.icon_exited_screen.connect(_on_icon_exited_screen)
+	else:
+		print(\"警告: 图标节点没有 icon_exited_screen 信号\")
+	
+	# 添加到活动列表
+	active_icons.append(new_icon)
+	
+	print(\"当前活动图标数量: \", active_icons.size())
+
+func _on_icon_clicked(icon, is_red_icon):
+	\"\"\"处理图标点击\"\"\"
+	print(\"图标被点击 - 红色: \", is_red_icon)
+	
+	if game_over:
+		return
+	
+	if is_red_icon:
+		# 点击红色图标 - 移除它
+		print(\"移除红色图标\")
+		_remove_icon(icon)
+		# 平滑移动后面的图标
+		_smooth_move_following_icons(icon)
+	else:
+		# 点击普通图标 - 游戏结束
+		print(\"游戏结束 - 点击了普通图标\")
+		_game_over(\"点击了普通图标！\")
+
+func _on_icon_exited_screen(icon):
+	\"\"\"图标完全离开屏幕\"\"\"
+	print(\"图标离开屏幕\")
+	_remove_icon(icon, false)  # 不触发平滑移动
+
+func _on_detection_area_body_entered(body):
+	\"\"\"图标进入检测区域\"\"\"
+	print(\"图标进入检测区域: \", body)
+	
+	if body is RigidBody2D and body.has_method(\"is_red_icon\"):
+		if not body.is_red_icon():  # 这里保持不变，因为这是调用方法
+			# 普通图标碰到检测区域 - 游戏结束
+			var texture = body.get_texture()
+			print(\"游戏结束 - 图标碰到检测区域\")
+			_game_over_with_texture(\"图标碰到检测区域！\", texture)
+
+func _remove_icon(icon, smooth_move = true):
+	\"\"\"移除图标\"\"\"
+	if icon in active_icons:
+		active_icons.erase(icon)
+	
+	print(\"移除图标，剩余: \", active_icons.size())
+	
+	# 创建消失动画
+	var tween = create_tween()
+	tween.tween_property(icon, \"scale\", Vector2(0.1, 0.1), 0.2)
+	tween.tween_callback(icon.queue_free)
+	
+	if smooth_move:
+		_smooth_move_following_icons(icon)
+
+func _smooth_move_following_icons(removed_icon):
+	\"\"\"平滑移动后面的图标填补空缺\"\"\"
+	var removed_pos = removed_icon.global_position
+	
+	for icon in active_icons:
+		# 只移动在移除图标后面的图标
+		if icon.global_position.x > removed_pos.x:
+			var tween = create_tween()
+			var target_pos = icon.global_position - Vector2(100, 0)  # 向左移动
+			tween.tween_property(icon, \"global_position\", target_pos, 0.3)
+
+func _game_over(reason):
+	\"\"\"游戏结束\"\"\"
+	game_over = true
+	spawn_timer.stop()
+	print(\"游戏结束: \", reason)
+	
+	# 这里可以添加游戏结束UI显示
+
+func _game_over_with_texture(reason, texture):
+	\"\"\"游戏结束并传递纹理\"\"\"
+	game_over = true
+	spawn_timer.stop()
+	print(\"游戏结束: \", reason)
+	
+	# 传递纹理给显示节点
+	if display_node and display_node.has_method(\"display_texture\"):
+		display_node.display_texture(texture)
+	else:
+		print(\"错误: 显示节点不存在或没有 display_texture 方法\")
+	
+	# 这里可以添加游戏结束UI显示
+
+func _input(event):
+	\"\"\"处理输入\"\"\"
+	if event is InputEventMouseButton and event.pressed:
+		if game_over:
+			# 重新开始游戏
+			print(\"重新开始游戏\")
+			get_tree().reload_current_scene()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jrx4"]
+
+[node name="game_1a" type="Node2D"]
+script = SubResource("GDScript_a3bdt")
+
+[node name="spawn1" type="Node2D" parent="."]
+script = ExtResource("1_b0e3b")
+card_width = 280.0
+
+[node name="SpawnArea1" type="Path2D" parent="spawn1"]
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="spawn1/SpawnArea1"]
+position = Vector2(2414, 613)
+rotation = 3.1415927
+
+[node name="spawn2" type="Node2D" parent="."]
+script = SubResource("GDScript_fvjhh")
+icon_textures = Array[Texture2D]([ExtResource("3_sx0ji"), ExtResource("4_xe0hg"), ExtResource("5_gy500")])
+
+[node name="SpawnArea1" type="Path2D" parent="spawn2"]
+position = Vector2(0, 280)
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="spawn2/SpawnArea1"]
+position = Vector2(2414, 613)
+rotation = 3.1415927
+
+[node name="display" type="TextureRect" parent="spawn2"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_e1all")
+
+[node name="Label" type="Label" parent="spawn2/display"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 70.0
+
+[node name="IconContainer" type="Node2D" parent="spawn2"]
+
+[node name="Cursor" type="Area2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+position = Vector2(268.99997, 251.99998)
+scale = Vector2(-2.3793457, 102.19152)
+shape = SubResource("RectangleShape2D_6jrx4")
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://g4uxcm7it72g"]
+
+[ext_resource type="Script" uid="uid://bf2pjr3qn8a6e" path="res://game_0/game1/spwan/spawn_1.gd" id="1_gbyhy"]
+[ext_resource type="PackedScene" uid="uid://dhncdyk1jvnye" path="res://game_0/game1/cursor.tscn" id="2_umxgh"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3127, 613, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[node name="spawn1" type="Node2D"]
+script = ExtResource("1_gbyhy")
+lane_y = null
+card_width = null
+card_height = null
+move_speed = 200.0
+spawn_interval_range = null
+spawn_chance = null
+max_cards_on_lane = null
+right_margin = null
+left_despawn_x = null
+
+[node name="SpawnArea1" type="Path2D" parent="."]
+position = Vector2(0, 65)
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnArea1"]
+position = Vector2(3127, 613)
+rotation = 3.1415927
+
+[node name="Cursor" parent="." instance=ExtResource("2_umxgh")]

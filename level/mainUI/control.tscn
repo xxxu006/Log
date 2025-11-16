@@ -1,0 +1,142 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpb400mwwitv0"]
+
+[ext_resource type="Texture2D" uid="uid://k7fm17v41iyx" path="res://level/mainUI/photos/图鉴.png" id="1_kt2wp"]
+[ext_resource type="Texture2D" uid="uid://btav8t8b7u8po" path="res://level/mainUI/photos/open.png" id="2_47gip"]
+[ext_resource type="Script" uid="uid://3d6pognxyyxo" path="res://level/mainUI/button_1.gd" id="3_4cu1w"]
+[ext_resource type="Texture2D" uid="uid://dvcexu8kj7bwn" path="res://level/mainUI/photos/default.png" id="4_u8qtv"]
+[ext_resource type="Script" uid="uid://cj3pjael6liak" path="res://level/mainUI/button_2.gd" id="5_12xvd"]
+[ext_resource type="Texture2D" uid="uid://sjl6tk6up513" path="res://level/mainUI/photos/return_button.png" id="6_0esww"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kdm78"]
+texture = ExtResource("1_kt2wp")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 74.0
+offset_bottom = 12.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1919.0
+offset_bottom = 1085.0
+color = Color(1, 1, 1, 0.517647)
+
+[node name="GuidePanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 107.0
+offset_right = 1891.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kdm78")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuidePanel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = -166.0
+offset_top = 158.0
+offset_right = 71.0
+offset_bottom = 823.0
+theme_override_constants/separation = 19
+
+[node name="Button1" type="TextureButton" parent="GuidePanel/VBoxContainer" node_paths=PackedStringArray("btn", "panel2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("2_47gip")
+texture_pressed = ExtResource("2_47gip")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_4cu1w")
+dfault = ExtResource("4_u8qtv")
+open = ExtResource("2_47gip")
+btn = NodePath("../Button2")
+panel2 = NodePath("../Button2/Panel")
+
+[node name="Panel" type="Panel" parent="GuidePanel/VBoxContainer/Button1"]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 140.0
+offset_right = 1324.0
+offset_bottom = 808.0
+
+[node name="Label" type="Label" parent="GuidePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.83137256, 0.8901961, 0.9098039)
+theme_override_font_sizes/font_size = 42
+text = "结局图鉴"
+horizontal_alignment = 1
+
+[node name="Button2" type="TextureButton" parent="GuidePanel/VBoxContainer" node_paths=PackedStringArray("btn", "panel2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("4_u8qtv")
+texture_pressed = ExtResource("2_47gip")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("5_12xvd")
+dfault = ExtResource("4_u8qtv")
+open = ExtResource("2_47gip")
+btn = NodePath("../Button1")
+panel2 = NodePath("../Button1/Panel")
+
+[node name="Panel" type="Panel" parent="GuidePanel/VBoxContainer/Button2"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 357.0
+offset_top = -263.0
+offset_right = 1330.0
+offset_bottom = 405.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuidePanel/VBoxContainer/Button2/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 366.0
+offset_right = 1346.0
+offset_bottom = 947.0
+scale = Vector2(0.6961131, 0.6961131)
+
+[node name="Label" type="Label" parent="GuidePanel/VBoxContainer/Button2/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5493164, 0.6090355, 0.625, 1)
+text = "策划：Nemo 此箱彼箱
+
+文案：Nemo
+
+美术：柏 何西
+
+程序：kalena 此箱彼箱 阿氧
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="GuidePanel/VBoxContainer/Button2/Panel/HBoxContainer"]
+layout_mode = 2
+text = "          "
+
+[node name="Label2" type="Label" parent="GuidePanel/VBoxContainer/Button2/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.60784316, 0.62352943, 1)
+text = "音效：小西
+
+logo：柏
+
+ui：阿氧 此箱彼箱"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="GuidePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.83137256, 0.8901961, 0.9098039)
+theme_override_colors/font_shadow_color = Color(0.7621765, 0.8671875, 0.84995914, 0)
+theme_override_font_sizes/font_size = 40
+text = "开发人员"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="GuidePanel"]
+layout_mode = 0
+offset_left = 1091.0
+offset_top = 25.0
+offset_right = 1339.0
+offset_bottom = 275.0
+texture_normal = ExtResource("6_0esww")
+ignore_texture_size = true
+stretch_mode = 5

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://225wadthurgl"]
+
+[ext_resource type="Script" uid="uid://lxupgjo6tcc3" path="res://game_0/game1/spwan/spawn_12.gd" id="1_5a5y7"]
+[ext_resource type="PackedScene" uid="uid://dhncdyk1jvnye" path="res://game_0/game1/cursor.tscn" id="2_bfpml"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2674, 613, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_sdtcv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2651, 612, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[node name="spawn12" type="Node2D"]
+script = ExtResource("1_5a5y7")
+
+[node name="SpawnArea1" type="Path2D" parent="."]
+position = Vector2(-2, -43)
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnArea1"]
+position = Vector2(2674, 613)
+rotation = 3.1415927
+
+[node name="Cursor" parent="SpawnArea1" instance=ExtResource("2_bfpml")]
+position = Vector2(-1, 267)
+scale = Vector2(0.9892, 0.390977)
+
+[node name="SpawnArea2" type="Path2D" parent="."]
+position = Vector2(-6, 169)
+curve = SubResource("Curve2D_sdtcv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnArea2"]
+position = Vector2(2651, 612)
+rotation = 3.141264
+
+[node name="Cursor2" parent="SpawnArea2" instance=ExtResource("2_bfpml")]
+position = Vector2(6, 644)
+scale = Vector2(0.978272, 0.0810925)

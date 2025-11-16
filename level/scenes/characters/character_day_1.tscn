@@ -1,0 +1,253 @@
+[gd_scene load_steps=21 format=3 uid="uid://dxarwp30uscc8"]
+
+[ext_resource type="Script" uid="uid://do8ubnlpbvha0" path="res://level/scenes/characters/character_day_1.gd" id="1_7ntur"]
+[ext_resource type="Texture2D" uid="uid://b6cepuimbsgnc" path="res://asset/人物/A.png" id="2_3rudp"]
+[ext_resource type="Texture2D" uid="uid://d2y64ptdgdryv" path="res://asset/人物/bug/end.png" id="2_b4sth"]
+[ext_resource type="Texture2D" uid="uid://cvr5wntkgu4y4" path="res://asset/人物/e9a55671ea8d760699dc1b8fb3c3169a.png" id="3_08yv0"]
+[ext_resource type="Texture2D" uid="uid://ffy32jc4ek64" path="res://asset/人物/beac65efb7afe50e23893391ffa55b3e.png" id="4_m5q1c"]
+[ext_resource type="Texture2D" uid="uid://ciyrgjt57r8b8" path="res://asset/人物/bug/眼.png" id="5_qtwjf"]
+[ext_resource type="Texture2D" uid="uid://cbsngufuj7giw" path="res://asset/人物/bug/end1.png" id="6_rdw87"]
+[ext_resource type="Texture2D" uid="uid://bayanwccadpo8" path="res://asset/人物/bug/end2.png" id="7_vkag0"]
+[ext_resource type="Texture2D" uid="uid://10kt2k8peor3" path="res://asset/人物/bug/剪刀.png" id="9_b4sth"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3rudp"]
+
+[sub_resource type="Animation" id="Animation_ip538"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_3rudp")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BugVisual3_3:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_b4sth")]
+}
+
+[sub_resource type="Animation" id="Animation_gdhf3"]
+resource_name = "bug3"
+loop_mode = 1
+step = 100.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BugVisual3_3:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.33588523, 0.48516756, 0.5831341, 0.67643553, 0.74174654, 0.961005, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_vkag0"), ExtResource("6_rdw87"), ExtResource("7_vkag0"), ExtResource("6_rdw87"), ExtResource("6_rdw87"), ExtResource("7_vkag0"), ExtResource("6_rdw87"), ExtResource("7_vkag0"), ExtResource("7_vkag0"), ExtResource("6_rdw87")]
+}
+
+[sub_resource type="Animation" id="Animation_7ntur"]
+resource_name = "enter_scene"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.9, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b4sth"]
+resource_name = "idle"
+length = 3.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 0.1, 0.13333334, 0.23333333, 0.3, 1.2866668, 1.3566668, 1.4292839, 1.5666667, 1.6666667, 1.7666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_3rudp"), ExtResource("3_08yv0"), ExtResource("4_m5q1c"), ExtResource("4_m5q1c"), ExtResource("2_3rudp"), ExtResource("2_3rudp"), ExtResource("3_08yv0"), ExtResource("4_m5q1c"), ExtResource("4_m5q1c"), ExtResource("3_08yv0"), ExtResource("2_3rudp")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbm06"]
+_data = {
+&"RESET": SubResource("Animation_ip538"),
+&"bug3": SubResource("Animation_gdhf3"),
+&"enter_scene": SubResource("Animation_7ntur"),
+&"idle": SubResource("Animation_b4sth")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vkag0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qtwjf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_08yv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_b4sth")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gdhf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_rdw87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vkag0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rdw87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vkag0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vkag0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rdw87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rdw87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rdw87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vkag0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08yv0"]
+size = Vector2(12.222781, 126.26106)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4sth"]
+radius = 0.33004472
+
+[node name="CharacterDay1" type="Node2D"]
+script = ExtResource("1_7ntur")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-6.1035156e-05, -143.00002)
+scale = Vector2(0.99999994, 0.99999994)
+texture = SubResource("CompressedTexture2D_3rudp")
+centered = false
+offset = Vector2(1.095, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tbm06")
+}
+autoplay = "idle"
+
+[node name="BugVisual3_1" type="AnimatedSprite2D" parent="."]
+position = Vector2(882, 560)
+sprite_frames = SubResource("SpriteFrames_vkag0")
+
+[node name="BugVisual3_2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(882, 560)
+sprite_frames = SubResource("SpriteFrames_08yv0")
+animation = &"new_animation"
+
+[node name="BugVisual3_3" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(882, 560)
+sprite_frames = SubResource("SpriteFrames_gdhf3")
+autoplay = "default"
+
+[node name="BugArea3_1" type="Area2D" parent="."]
+position = Vector2(882, 560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BugArea3_1"]
+z_index = 10
+position = Vector2(290, -287.0001)
+rotation = 3.14159
+scale = Vector2(23.841, -1.32806)
+shape = SubResource("RectangleShape2D_08yv0")
+
+[node name="BugArea3_2" type="Area2D" parent="."]
+position = Vector2(-987.61, -396.372)
+scale = Vector2(1.87524, 1.87524)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BugArea3_2"]
+position = Vector2(1134.8269, 627.31805)
+scale = Vector2(9.55145, 1.3488199)
+shape = SubResource("RectangleShape2D_08yv0")
+
+[node name="BugArea3_3" type="Area2D" parent="."]
+visible = false
+position = Vector2(-1132.01, -488.26)
+scale = Vector2(2.029238, 1.0623353)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BugArea3_3"]
+position = Vector2(1356.6719, 1072.411)
+scale = Vector2(29.118958, 37.950264)
+shape = SubResource("CircleShape2D_b4sth")
+
+[node name="EndingSprite" type="Sprite2D" parent="."]

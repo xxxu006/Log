@@ -1,0 +1,178 @@
+[gd_scene load_steps=6 format=3 uid="uid://c81o2vgj67swa"]
+
+[sub_resource type="GDScript" id="GDScript_a3bdt"]
+script/source = "extends Node2D
+
+signal game_failed
+
+# 卡牌类型和对应的纹理
+enum CARD_TYPE {DAY = 1, MEAL = 2, NIGHT = 3}
+const CARD_TEXTURES = {
+	CARD_TYPE.DAY: preload(\"res://game_0/game1/f55d8d5255fa57362e80c9482fbcf511.jpg\"),  # 请替换为实际路径
+	CARD_TYPE.MEAL: preload(\"res://game_0/game1/7ef5764755167867644c83efb5af2fb0.jpg\"), # 请替换为实际路径
+	CARD_TYPE.NIGHT: preload(\"res://game_0/game1/a5c436a9c69a5972603cfd29c7936fa3.jpg\") # 请替换为实际路径
+}
+
+# 卡牌信息
+const CARD_INFO = {
+	CARD_TYPE.DAY: \"白天\",
+	CARD_TYPE.MEAL: \"吃饭\", 
+	CARD_TYPE.NIGHT: \"晚上\"
+}
+
+@onready var spawn_area: Path2D = $SpawnArea
+@onready var cursor: Area2D = $Cursor
+
+var cards: Array = []  # 存储所有卡牌
+var expected_sequence: Array = []  # 期望的顺序
+var current_sequence_index: int = 0
+var card_width: float = 100.0  # 卡牌宽度，根据实际调整
+var spawn_timer: Timer
+var is_game_active: bool = true
+
+func _ready():
+	# 初始化期望序列 (1,2,3,1,2,3...)
+	for i in range(20):  # 生成足够长的序列
+		expected_sequence.append((i % 3) + 1)
+	
+	# 设置定时器
+	spawn_timer = Timer.new()
+	spawn_timer.wait_time = randf_range(1.0, 3.0)  # 随机生成间隔
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	add_child(spawn_timer)
+	spawn_timer.start()
+	
+	# 连接光标信号
+	cursor.area_entered.connect(_on_card_reached_cursor)
+
+func _on_spawn_timer_timeout():
+	if is_game_active:
+		spawn_card()
+		# 设置下一次生成时间
+		spawn_timer.wait_time = randf_range(1.0, 3.0)
+		spawn_timer.start()
+
+func spawn_card():
+	var card_type = (randi() % 3) + 1  # 随机生成1,2,3
+	
+	var card = Area2D.new()
+	card.set_script(preload(\"res://Card.gd\"))
+	
+	var collision = CollisionShape2D.new()
+	var shape = RectangleShape2D.new()
+	shape.size = Vector2(card_width, 150)  # 卡牌尺寸
+	collision.shape = shape
+	card.add_child(collision)
+	
+	var sprite = Sprite2D.new()
+	sprite.texture = CARD_TEXTURES[card_type]
+	sprite.position = Vector2(0, 0)
+	card.add_child(sprite)
+	
+	# 设置卡牌属性
+	card.card_type = card_type
+	card.card_info = CARD_INFO[card_type]
+	card.is_moving = true
+	card.speed = 50.0
+	card.game_node = self
+	
+	# 设置初始位置（生成区域最右边）
+	var spawn_points = spawn_area.curve.get_baked_points()
+	if spawn_points.size() > 0:
+		card.position = spawn_points[0]
+	
+	add_child(card)
+	cards.append(card)
+
+func _on_card_reached_cursor(area):
+	if area is Area2D and area.has_method(\"get_card_type\"):
+		var card_type = area.get_card_type()
+		
+		if card_type == expected_sequence[current_sequence_index]:
+			# 顺序正确
+			current_sequence_index += 1
+			if current_sequence_index >= expected_sequence.size():
+				current_sequence_index = 0  # 循环序列
+			area.queue_free()  # 移除卡牌
+			cards.erase(area)
+		else:
+			# 顺序错误，游戏失败
+			_game_failed()
+
+func _game_failed():
+	is_game_active = false
+	game_failed.emit()
+	print(\"游戏失败！顺序错误！\")
+
+# 获取卡牌在轨道上的索引
+func get_card_index(card: Area2D) -> int:
+	return cards.find(card)
+
+# 重新排列卡牌位置
+func rearrange_cards():
+	for i in range(cards.size()):
+		var card = cards[i]
+		if card.is_moving:  # 只排列非拖拽状态的卡牌
+			var target_x = spawn_area.position.x + i * card_width
+			card.position.x = target_x
+
+# 检查是否可以组成完整的123序列
+func check_sequence_completion():
+	var day_count = 0
+	var meal_count = 0
+	var night_count = 0
+	
+	for card in cards:
+		match card.card_type:
+			CARD_TYPE.DAY: day_count += 1
+			CARD_TYPE.MEAL: meal_count += 1
+			CARD_TYPE.NIGHT: night_count += 1
+	
+	var min_groups = min(day_count, meal_count, night_count)
+	print(\"当前卡牌分布 - 白天:\", day_count, \" 吃饭:\", meal_count, \" 晚上:\", night_count)
+	print(\"可以组成\", min_groups, \"个完整序列\")
+"
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2027, 614, 0, 0, 0, 0, -124, 614)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0e3b"]
+size = Vector2(41.5677, 15.7248955)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jrx4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rt0p"]
+
+[node name="game_1a" type="Node2D"]
+script = SubResource("GDScript_a3bdt")
+
+[node name="SpawnArea1" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnArea1"]
+position = Vector2(2027, 614)
+rotation = 3.1415927
+
+[node name="SpawnArea2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea2"]
+position = Vector2(1362.1235, 890.99994)
+scale = Vector2(82.750626, 20.26238)
+shape = SubResource("RectangleShape2D_b0e3b")
+
+[node name="Cursor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+position = Vector2(268.99997, 251.99998)
+scale = Vector2(-2.3793457, 102.19152)
+shape = SubResource("RectangleShape2D_6jrx4")
+
+[node name="DisplayArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DisplayArea"]
+position = Vector2(903, 253.00003)
+scale = Vector2(31.599016, 20.612104)
+shape = SubResource("RectangleShape2D_4rt0p")

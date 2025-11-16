@@ -1,0 +1,34 @@
+[gd_scene load_steps=13 format=3 uid="uid://cnc6v3bxd22b0"]
+
+[ext_resource type="Script" uid="uid://bbywnobiaurky" path="res://game_0/game1/spwan/spawn_2.gd" id="1_xts8a"]
+[ext_resource type="Texture2D" uid="uid://cv68cd65oewxg" path="res://asset/画片/1438c6612c1e3cb64f7287688b7ad1d2.png" id="2_3ba2f"]
+[ext_resource type="Texture2D" uid="uid://dq7oml8oiffqt" path="res://asset/画片/47a3e790905de68bcf1133eb04c4d5be.png" id="3_lbg86"]
+[ext_resource type="Texture2D" uid="uid://dns76kxv4bahe" path="res://asset/画片/9551c5c498162c38a6f8466511ad187f.png" id="4_c5w6g"]
+[ext_resource type="Texture2D" uid="uid://dh3fafa8x62hb" path="res://asset/画片/ef98c4261d695e93686d57d4d5f3833d.png" id="4_hi2se"]
+[ext_resource type="PackedScene" uid="uid://dhncdyk1jvnye" path="res://game_0/game1/cursor.tscn" id="5_cqb45"]
+[ext_resource type="Texture2D" uid="uid://bja71bli55nmt" path="res://asset/画片/f2fc4fd6323be62a38b8d1b191d644ec.png" id="5_ryles"]
+[ext_resource type="Texture2D" uid="uid://lape52txvm0p" path="res://asset/画片/78dbe38c2cfedb29ad7dd2839bd6f57e.png" id="6_tetpd"]
+[ext_resource type="Texture2D" uid="uid://bwm5co0pgchbh" path="res://asset/画片/54ebe78ae3238ef37230a38a1344ee36.png" id="7_s8pph"]
+[ext_resource type="Texture2D" uid="uid://wvevd8rfc274" path="res://asset/画片/39bd8598414aefa396ba9fe77bc2393d.png" id="9_rj08r"]
+[ext_resource type="Texture2D" uid="uid://du2waq0ueeag" path="res://asset/画片/7c903b0524435940fa8707e5f6242399.png" id="10_vi1qh"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2900, 613, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[node name="spawn2" type="Node2D"]
+script = ExtResource("1_xts8a")
+spawn_textures = Array[Texture2D]([ExtResource("5_ryles"), ExtResource("4_hi2se"), ExtResource("4_c5w6g"), ExtResource("2_3ba2f"), ExtResource("6_tetpd"), ExtResource("7_s8pph"), ExtResource("3_lbg86"), ExtResource("9_rj08r"), ExtResource("10_vi1qh")])
+move_speed = 220.0
+
+[node name="SpawnArea1" type="Path2D" parent="."]
+position = Vector2(0, 306)
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnArea1"]
+position = Vector2(2900, 613)
+rotation = 3.1415927
+
+[node name="Cursor" parent="." instance=ExtResource("5_cqb45")]

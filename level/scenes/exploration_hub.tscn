@@ -1,0 +1,210 @@
+[gd_scene load_steps=20 format=3 uid="uid://c2c5itdiw5rgq"]
+
+[ext_resource type="Script" uid="uid://6ndo5rf5s3e7" path="res://level/scenes/exploration_hub.gd" id="1_iqsqa"]
+[ext_resource type="PackedScene" uid="uid://bc1bxnyixuf7f" path="res://level/dialog/dialogue_frame.tscn" id="2_tfbkm"]
+[ext_resource type="Texture2D" uid="uid://btkmb8axutq8q" path="res://asset/场景/背景.jpg" id="2_wn65l"]
+[ext_resource type="Script" uid="uid://bb054a31mpgxr" path="res://level/scenes/back.gd" id="3_e6c7h"]
+[ext_resource type="Texture2D" uid="uid://cfawl3r88uej2" path="res://asset/场景/前景.png" id="3_npgxt"]
+[ext_resource type="PackedScene" uid="uid://brmmirf8s0mwj" path="res://level/mainUI/pausemenu.tscn" id="4_npgxt"]
+[ext_resource type="Texture2D" uid="uid://cr12s5liy5bfs" path="res://asset/场景/医疗设备.png" id="4_wjgqt"]
+[ext_resource type="Texture2D" uid="uid://21m5qvwjrxu7" path="res://asset/场景/文件夹.png" id="5_54b3h"]
+[ext_resource type="PackedScene" uid="uid://dgoweerypmakt" path="res://level/mainUI/setting.tscn" id="8_54b3h"]
+[ext_resource type="Script" uid="uid://bswdwmtf21rsh" path="res://level/scenes/magnifier_button.gd" id="8_bsvnv"]
+[ext_resource type="PackedScene" uid="uid://bd6epyupw3ihl" path="res://level/glass_big/magnifier.tscn" id="8_wjgqt"]
+[ext_resource type="Texture2D" uid="uid://kx6d34bfn8e8" path="res://asset/小道具/放大镜.png" id="9_e3skd"]
+[ext_resource type="Script" uid="uid://ir43s60em8tv" path="res://level/scenes/gameui.gd" id="10_ku85l"]
+[ext_resource type="PackedScene" uid="uid://dorxqy12sfnqe" path="res://level/dialog/dialog.tscn" id="10_lemnl"]
+[ext_resource type="Script" uid="uid://si4hprf2wdjl" path="res://level/scenes/pasemenuui.gd" id="12_qsxbs"]
+[ext_resource type="FontFile" uid="uid://6qw75073405" path="res://asset/font/NotoSansCJK-Medium-5.otf" id="14_qsxbs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhnyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e6c7h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qsxbs"]
+
+[node name="ExplorationHub" type="Node2D"]
+script = ExtResource("1_iqsqa")
+
+[node name="back" type="NinePatchRect" parent="."]
+offset_right = 2494.0
+offset_bottom = 1405.0
+scale = Vector2(0.8174, 0.8534415)
+texture = ExtResource("2_wn65l")
+region_rect = Rect2(0, 0, 2500, 1406)
+patch_margin_left = 619
+patch_margin_top = 110
+patch_margin_right = 199
+script = ExtResource("3_e6c7h")
+
+[node name="DialogueFrame" parent="." instance=ExtResource("2_tfbkm")]
+modulate = Color(1, 1, 1, 0.7411765)
+offset_left = 394.0
+offset_top = 100.0
+offset_right = 434.0
+offset_bottom = 140.0
+scale = Vector2(13.170143, 22.803804)
+
+[node name="CharacterAnchor" type="Node2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="前景" type="NinePatchRect" parent="."]
+offset_left = 1.0000001
+offset_right = 2371.3706
+offset_bottom = 1437.0371
+scale = Vector2(0.81, 0.81)
+size_flags_horizontal = 3
+texture = ExtResource("3_npgxt")
+region_rect = Rect2(0, 0, 2500, 1406)
+patch_margin_left = 458
+patch_margin_top = 667
+patch_margin_right = 264
+patch_margin_bottom = 622
+script = ExtResource("3_e6c7h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer3"]
+
+[node name="DialogueSystemUI" parent="CanvasLayer3/CanvasLayer" node_paths=PackedStringArray("check_btn") instance=ExtResource("10_lemnl")]
+offset_left = 436.0
+offset_top = 162.0
+offset_right = 892.0
+offset_bottom = 864.0
+check_btn = NodePath("../../../setting/setting/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/check_btn")
+
+[node name="DialogueScrollContainer" parent="CanvasLayer3/CanvasLayer/DialogueSystemUI" index="0"]
+offset_right = 450.0
+offset_bottom = 699.0
+focus_mode = 2
+
+[node name="InGameUI" type="CanvasLayer" parent="CanvasLayer3"]
+
+[node name="MagnifierButton" type="Button" parent="CanvasLayer3/InGameUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -441.99988
+offset_top = 182.0
+offset_right = -133.99988
+offset_bottom = 490.0
+grow_horizontal = 0
+scale = Vector2(0.779, 0.779)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mhnyi")
+icon = ExtResource("9_e3skd")
+flat = true
+script = ExtResource("8_bsvnv")
+
+[node name="PointsLabel" type="Label" parent="CanvasLayer3/InGameUI"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -207.0
+offset_top = -52.0
+offset_right = -167.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.011764706, 0, 0.003921569, 0.6784314)
+theme_override_font_sizes/font_size = 49
+
+[node name="magnifier" parent="CanvasLayer3/InGameUI" instance=ExtResource("8_wjgqt")]
+position = Vector2(1627, 457)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="CanvasLayer3"]
+
+[node name="gameui" type="Button" parent="CanvasLayer3/CanvasLayer2"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -615.0
+offset_top = -592.0
+offset_right = 293.0
+offset_bottom = 316.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.629249, 0.629249)
+theme_override_colors/icon_disabled_color = Color(0.7832794, 0.80765533, 0.83203125, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e6c7h")
+icon = ExtResource("4_wjgqt")
+flat = true
+script = ExtResource("10_ku85l")
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="CanvasLayer3/CanvasLayer2/gameui"]
+layout_mode = 1
+offset_left = 232.02263
+offset_top = 189.11433
+offset_right = 272.02264
+offset_bottom = 229.11433
+scale = Vector2(2.2046611, 2.2046611)
+
+[node name="pasemenuui" type="Button" parent="CanvasLayer3/CanvasLayer2"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -265.0
+offset_right = 623.0
+offset_bottom = 143.0
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qsxbs")
+icon = ExtResource("5_54b3h")
+flat = true
+expand_icon = true
+script = ExtResource("12_qsxbs")
+
+[node name="PauseMenu" parent="CanvasLayer3/CanvasLayer2" instance=ExtResource("4_npgxt")]
+visible = false
+z_index = 12
+
+[node name="Mask" parent="CanvasLayer3/CanvasLayer2/PauseMenu" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" parent="CanvasLayer3/CanvasLayer2/PauseMenu" index="1"]
+anchors_preset = -1
+anchor_left = 1.041
+anchor_right = 1.041
+offset_left = -1538.72
+offset_right = -77.71997
+
+[node name="HBoxContainer" parent="CanvasLayer3/CanvasLayer2/PauseMenu/Panel" index="0"]
+offset_left = 343.0
+offset_right = 1064.0
+
+[node name="Label" parent="CanvasLayer3/CanvasLayer2/PauseMenu/Panel/HBoxContainer/VBoxContainer2/VBoxContainer" index="0"]
+theme_override_font_sizes/font_size = 49
+text = "可用关键词记录"
+
+[node name="CollectedKeywordsLabel" type="Label" parent="CanvasLayer3/CanvasLayer2/PauseMenu/Panel/HBoxContainer/VBoxContainer2/VBoxContainer" index="1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.40548706, 0.46930575, 0.50390625, 1)
+theme_override_fonts/font = ExtResource("14_qsxbs")
+theme_override_font_sizes/font_size = 37
+text_overrun_behavior = 1
+max_lines_visible = 7
+
+[node name="setting" type="CanvasLayer" parent="."]
+
+[node name="setting" parent="setting" instance=ExtResource("8_54b3h")]
+visible = false
+
+[connection signal="button_down" from="CanvasLayer3/CanvasLayer2/PauseMenu/Panel/CloseButton" to="." method="_on_close_button_button_down"]
+
+[editable path="CanvasLayer3/CanvasLayer/DialogueSystemUI"]
+[editable path="CanvasLayer3/CanvasLayer2/PauseMenu"]
+[editable path="setting/setting"]

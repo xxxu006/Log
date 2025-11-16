@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgoweerypmakt"]
+
+[ext_resource type="Theme" uid="uid://qtfj23e38sl7" path="res://shader/our_theme.tres" id="1_3d1qu"]
+[ext_resource type="Script" uid="uid://drab05vwj8akw" path="res://level/setting.gd" id="2_0hbl8"]
+[ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="2_by7uj"]
+[ext_resource type="Script" uid="uid://bxt7puq1xw208" path="res://auto_loads/buttonsfxcomponent.gd" id="3_8qf78"]
+[ext_resource type="Script" uid="uid://bis2q1n5sds5e" path="res://level/volumeslider.gd" id="5_i8tg7"]
+
+[node name="setting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_3d1qu")
+script = ExtResource("2_0hbl8")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -127.0
+offset_bottom = 141.0
+grow_horizontal = 0
+text = "关闭"
+
+[node name="ButtonSFXComponent" type="Node" parent="Button"]
+script = ExtResource("3_8qf78")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 119.0
+offset_top = -327.0
+offset_right = 563.0
+offset_bottom = 327.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 29
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 40
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 36
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_by7uj")
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_by7uj")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_by7uj")
+
+[node name="volumeslider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -625.0
+offset_top = -317.0
+offset_right = 111.0
+offset_bottom = -206.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_i8tg7")
+
+[node name="Label" type="Label" parent="volumeslider"]
+layout_mode = 0
+offset_left = -176.0
+offset_top = 19.0
+offset_right = -48.0
+offset_bottom = 89.0
+size_flags_stretch_ratio = 0.96
+text = "音量"
+
+[node name="Container" type="Container" parent="volumeslider"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VolumeValue" type="Label" parent="volumeslider/Container"]
+layout_mode = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="volumeslider" to="." method="_on_volumeslider_value_changed"]

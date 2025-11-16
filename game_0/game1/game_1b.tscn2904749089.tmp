@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://li4xe1vytuyh"]
+
+[ext_resource type="PackedScene" uid="uid://225wadthurgl" path="res://game_0/game1/spwan/spawn_12.tscn" id="2_8k1mv"]
+[ext_resource type="PackedScene" uid="uid://cnc6v3bxd22b0" path="res://game_0/game1/spwan/spawn_2.tscn" id="3_8sb83"]
+[ext_resource type="PackedScene" uid="uid://d3b1ux85q8ola" path="res://game_0/game1/spwan/spawn_22.tscn" id="4_ec3ll"]
+
+[node name="game_1b" type="Node2D"]
+
+[node name="spawn12" parent="." instance=ExtResource("2_8k1mv")]
+position = Vector2(2, -292)
+lane_y = null
+card_width = null
+card_height = null
+move_speed = null
+spawn_interval_range = null
+spawn_chance = null
+max_cards_on_lane = null
+right_margin = null
+left_despawn_x = null
+target_path_node = null
+
+[node name="spawn2" parent="." instance=ExtResource("3_8sb83")]
+position = Vector2(3, -237)
+
+[node name="spawn22" parent="." instance=ExtResource("4_ec3ll")]

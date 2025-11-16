@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://dorxqy12sfnqe"]
+
+[ext_resource type="Script" uid="uid://b7peffe7qasmn" path="res://level/dialog/dialog.gd" id="1_1kary"]
+
+[node name="dialog" type="Control" node_paths=PackedStringArray("dialogue_container", "options_container", "dialogue_scroll_container")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 398.875
+offset_bottom = 513.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_1kary")
+dialogue_container = NodePath("DialogueScrollContainer/dialogue_container")
+options_container = NodePath("options_container")
+dialogue_scroll_container = NodePath("DialogueScrollContainer")
+
+[node name="DialogueScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_right = 364.0
+offset_bottom = 472.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="dialogue_container" type="VBoxContainer" parent="DialogueScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="options_container" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 500.0

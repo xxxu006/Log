@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhncdyk1jvnye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jrx4"]
+size = Vector2(272.67706, 20)
+
+[node name="Cursor" type="Area2D"]
+light_mask = 3
+visibility_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-31.603043, 252.00038)
+rotation = 3.14159
+scale = Vector2(2.37935, -102.192)
+shape = SubResource("RectangleShape2D_6jrx4")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(6, 445)
+points = PackedVector2Array(302, 1108, 302, -9)
+width = 4.0
+default_color = Color(1, 0, 0, 1)

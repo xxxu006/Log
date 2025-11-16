@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbg6r7cnvah3q"]
+
+[ext_resource type="PackedScene" uid="uid://g4uxcm7it72g" path="res://game_0/game1/spwan/spawn_1.tscn" id="1_6jrx4"]
+[ext_resource type="Script" uid="uid://bci5yu2ly3rcd" path="res://game_0/game1/game_1a.gd" id="1_e1all"]
+[ext_resource type="PackedScene" uid="uid://cnc6v3bxd22b0" path="res://game_0/game1/spwan/spawn_2.tscn" id="2_4rt0p"]
+[ext_resource type="Texture2D" uid="uid://u57ianm0e76g" path="res://asset/场景/c45fd242e4d28f1e13baff6914e50756.png" id="2_sx0ji"]
+[ext_resource type="PackedScene" uid="uid://r6squ2fgq6al" path="res://game_0/game1/spwan/display_node.tscn" id="4_e1all"]
+[ext_resource type="PackedScene" uid="uid://dcs1iinsth57p" path="res://shader/CRT.tscn" id="5_fvjhh"]
+
+[node name="game_1a" type="Node2D"]
+script = ExtResource("1_e1all")
+
+[node name="C45Fd242e4d28f1e13Baff6914e50756" type="Sprite2D" parent="."]
+position = Vector2(967, 566)
+scale = Vector2(1.0202593, 1.0501395)
+texture = ExtResource("2_sx0ji")
+
+[node name="spawn1" parent="." instance=ExtResource("1_6jrx4")]
+
+[node name="spawn2" parent="." instance=ExtResource("2_4rt0p")]
+move_speed = 150.0
+
+[node name="DisplayNode" parent="spawn2" instance=ExtResource("4_e1all")]
+offset_left = 621.0
+offset_right = 621.0
+
+[node name="CRT" parent="spawn2" instance=ExtResource("5_fvjhh")]
+visible = false

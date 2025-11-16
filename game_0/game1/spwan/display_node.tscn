@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://r6squ2fgq6al"]
+
+[ext_resource type="Texture2D" uid="uid://30dmj4i7p3n7" path="res://asset/小道具/循环录像带2.png" id="1_2yseo"]
+
+[node name="DisplayNode" type="TextureRect"]
+scale = Vector2(2.3, 2.3)
+
+[node name="循环录像带2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.2784314)
+self_modulate = Color(0.5794525, 0.92163324, 0.95703125, 0.4745098)
+layout_mode = 1
+offset_left = -20.869566
+offset_right = 1179.1305
+offset_bottom = 938.0
+scale = Vector2(0.28, 0.22814402)
+texture = ExtResource("1_2yseo")

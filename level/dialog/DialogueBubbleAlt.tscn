@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://det56trqx08a8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0a6v"]
+bg_color = Color(0.6, 0.6, 0.23137255, 1)
+
+[sub_resource type="GDScript" id="GDScript_wyaaa"]
+script/source = "extends PanelContainer
+
+@onready var dialogue_text_label = $MarginContainer/DialogueText
+
+# 这个函数由 dialog.gd 调用
+func setup_bubble(speaker: String):
+	# 根据说话人设置对齐方式
+	match speaker:
+		\"Player\":
+			self.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		\"Patient\":
+			self.size_flags_horizontal = Control.SIZE_SHRINK_END
+		\"System\":
+			self.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+"
+
+[node name="DialogueBubbleAlt" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_n0a6v")
+script = SubResource("GDScript_wyaaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="DialogueText" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true

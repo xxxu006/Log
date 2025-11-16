@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnj2hvwmbwada"]
+
+[ext_resource type="Script" uid="uid://dvfjav045qgk0" path="res://level/endload/ending_1.gd" id="1_yta4w"]
+[ext_resource type="Script" uid="uid://bxt7puq1xw208" path="res://auto_loads/buttonsfxcomponent.gd" id="2_kjsno"]
+[ext_resource type="AudioStream" uid="uid://yw84uejlonyv" path="res://asset/音效/剪辑音.mp3" id="3_40sbm"]
+[ext_resource type="AudioStream" uid="uid://bgvsvhritdvme" path="res://asset/音效/按键音_2.mp3" id="4_b72yj"]
+
+[node name="Ending1" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yta4w")
+
+[node name="LockedOverlay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1432.0
+offset_top = 897.0
+offset_right = 1712.0
+offset_bottom = 952.0
+theme_override_font_sizes/font_size = 44
+text = "医师签名：_______"
+flat = true
+
+[node name="ButtonSFXComponent" type="Node" parent="Button"]
+script = ExtResource("2_kjsno")
+click_sfx = ExtResource("3_40sbm")
+hover_sfx = ExtResource("4_b72yj")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"

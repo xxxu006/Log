@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnc6v3bxd22b0"]
+
+[ext_resource type="Script" uid="uid://bbywnobiaurky" path="res://game_0/game1/spawn_2.gd" id="1_xts8a"]
+[ext_resource type="Texture2D" uid="uid://c01n6p66kiimq" path="res://原始/7ef5764755167867644c83efb5af2fb0.jpg" id="2_cqb45"]
+[ext_resource type="Texture2D" uid="uid://dtxlkd7osdwoc" path="res://原始/f55d8d5255fa57362e80c9482fbcf511.jpg" id="4_cqb45"]
+[ext_resource type="Texture2D" uid="uid://kgqeb8ol51vg" path="res://原始/a5c436a9c69a5972603cfd29c7936fa3.jpg" id="4_sljiw"]
+[ext_resource type="PackedScene" uid="uid://ddsdhoeptp22p" path="res://game_0/game1/cursor.tscn" id="5_cqb45"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rt0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2216, 612, 0, 0, 0, 0, -391, 613)
+}
+point_count = 2
+
+[node name="spawn2" type="Node2D"]
+script = ExtResource("1_xts8a")
+spawn_textures = Array[Texture2D]([ExtResource("2_cqb45"), ExtResource("4_sljiw"), ExtResource("4_cqb45")])
+red_icon_chance = null
+move_speed = null
+
+[node name="SpawnArea1" type="Path2D" parent="."]
+position = Vector2(0, 306)
+curve = SubResource("Curve2D_4rt0p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SpawnArea1"]
+position = Vector2(2216, 612)
+rotation = 3.1412091
+
+[node name="Cursor" parent="." instance=ExtResource("5_cqb45")]
+
+[node name="DisplayNode" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

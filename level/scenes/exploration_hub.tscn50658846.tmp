@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2c5itdiw5rgq"]
+
+[ext_resource type="Script" uid="uid://6ndo5rf5s3e7" path="res://level/scenes/exploration_hub.gd" id="1_iqsqa"]
+[ext_resource type="Texture2D" uid="uid://btkmb8axutq8q" path="res://asset/场景/背景.jpg" id="2_wn65l"]
+[ext_resource type="Texture2D" uid="uid://cfawl3r88uej2" path="res://asset/场景/前景.png" id="3_npgxt"]
+[ext_resource type="Texture2D" uid="uid://b6cepuimbsgnc" path="res://asset/人物/1761110542073.png" id="3_wjgqt"]
+[ext_resource type="PackedScene" uid="uid://brmmirf8s0mwj" path="res://level/mainUI/pausemenu.tscn" id="4_npgxt"]
+[ext_resource type="Texture2D" uid="uid://cr12s5liy5bfs" path="res://asset/场景/医疗设备.png" id="4_wjgqt"]
+[ext_resource type="Texture2D" uid="uid://21m5qvwjrxu7" path="res://asset/场景/文件夹.png" id="5_54b3h"]
+[ext_resource type="PackedScene" uid="uid://bd6epyupw3ihl" path="res://level/glass_big/magnifier.tscn" id="8_wjgqt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqsqa"]
+bg_color = Color(0.6, 0.6, 0.6, 0.32941177)
+border_color = Color(0.8600014, 1.0210065, 1.2127175, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+anti_aliasing_size = 0.22
+
+[node name="ExplorationHub" type="Node2D"]
+script = ExtResource("1_iqsqa")
+
+[node name="Node2D" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="背景" type="Sprite2D" parent="Node2D"]
+position = Vector2(1026, 590)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("2_wn65l")
+metadata/_edit_lock_ = true
+
+[node name="CharacterAnchor" type="Node2D" parent="Node2D"]
+scale = Vector2(0.99731886, 1)
+
+[node name="1761110542073" type="Sprite2D" parent="Node2D"]
+position = Vector2(1022, 583)
+texture = ExtResource("3_wjgqt")
+
+[node name="前景" type="Sprite2D" parent="Node2D"]
+position = Vector2(979.0001, 579.00006)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_npgxt")
+
+[node name="DialogueFrame" type="PanelContainer" parent="Node2D"]
+offset_left = 413.00006
+offset_top = 88.0
+offset_right = 453.00006
+offset_bottom = 128.0
+scale = Vector2(13.270127, 18.908936)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_iqsqa")
+
+[node name="InGameUI" type="CanvasLayer" parent="."]
+
+[node name="ProgressLabel" type="Label" parent="InGameUI"]
+offset_left = 216.0
+offset_top = 928.0
+offset_right = 256.0
+offset_bottom = 998.0
+
+[node name="DialogueSystemUI" type="Control" parent="InGameUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = 0.019311262
+
+[node name="pasemenuui" type="Button" parent="InGameUI"]
+offset_left = 227.0
+offset_top = 826.0
+offset_right = 635.0
+offset_bottom = 1234.0
+icon = ExtResource("5_54b3h")
+flat = true
+expand_icon = true
+
+[node name="gameui" type="Button" parent="InGameUI"]
+offset_left = 1365.9999
+offset_top = 515.0
+offset_right = 2274.0
+offset_bottom = 1423.0
+scale = Vector2(0.62924933, 0.62924933)
+icon = ExtResource("4_wjgqt")
+flat = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_npgxt")]
+visible = false
+offset_left = 198.0
+offset_top = 311.0
+offset_right = 198.0
+offset_bottom = 311.0
+
+[node name="magnifier" parent="." instance=ExtResource("8_wjgqt")]
+position = Vector2(119, 163)

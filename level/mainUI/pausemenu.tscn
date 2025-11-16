@@ -1,0 +1,196 @@
+[gd_scene load_steps=27 format=3 uid="uid://brmmirf8s0mwj"]
+
+[ext_resource type="Script" uid="uid://i8rb7xugv7y" path="res://level/mainUI/pause_menu.gd" id="1_2vi77"]
+[ext_resource type="Texture2D" uid="uid://k7fm17v41iyx" path="res://level/mainUI/photos/图鉴.png" id="2_vb2la"]
+[ext_resource type="PackedScene" uid="uid://dgoweerypmakt" path="res://level/mainUI/setting.tscn" id="3_4l0at"]
+[ext_resource type="Script" uid="uid://bxt7puq1xw208" path="res://auto_loads/buttonsfxcomponent.gd" id="3_xfudq"]
+[ext_resource type="AudioStream" uid="uid://caqqjbjrquon3" path="res://asset/音效/按键音_3.mp3" id="4_obmxm"]
+[ext_resource type="AudioStream" uid="uid://8cnj8fqg2w4c" path="res://asset/音效/剪刀_2.mp3" id="5_jlxr7"]
+[ext_resource type="Texture2D" uid="uid://sjl6tk6up513" path="res://level/mainUI/photos/return_button.png" id="6_jlxr7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jlxr7"]
+texture = ExtResource("2_vb2la")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bxs5q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_krnpl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7t7j3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g73mv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7t0gj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2wb5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_piaet"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kyn7p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sevcl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bdrok"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btjig"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6gavd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_prlro"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vw0mm"]
+texture = ExtResource("6_jlxr7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gc6ge"]
+texture = ExtResource("6_jlxr7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bwhy6"]
+texture = ExtResource("6_jlxr7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8th6t"]
+texture = ExtResource("6_jlxr7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i5bf0"]
+texture = ExtResource("6_jlxr7")
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("panel", "mask")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2vi77")
+panel = NodePath("Panel")
+mask = NodePath("Mask")
+
+[node name="Mask" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -63.0
+offset_right = 1915.0
+offset_bottom = 1130.0
+color = Color(1, 1, 1, 0.631373)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1461.0
+offset_top = -926.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_jlxr7")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 448.0
+offset_right = 1045.0
+offset_bottom = 922.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bxs5q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_krnpl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7t7j3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g73mv")
+text = "继续游戏"
+
+[node name="ButtonSFXComponent" type="Node" parent="Panel/HBoxContainer/VBoxContainer/ContinueButton"]
+script = ExtResource("3_xfudq")
+click_sfx = ExtResource("4_obmxm")
+hover_sfx = ExtResource("5_jlxr7")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.698792, 0.744357, 0.835938, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7t0gj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_o2wb5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_piaet")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kyn7p")
+text = "设置"
+
+[node name="ButtonSFXComponent" type="Node" parent="Panel/HBoxContainer/VBoxContainer/SettingsButton"]
+script = ExtResource("3_xfudq")
+click_sfx = ExtResource("4_obmxm")
+hover_sfx = ExtResource("5_jlxr7")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="MainButton" type="Button" parent="Panel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sevcl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bdrok")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_btjig")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6gavd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_prlro")
+text = "回到主界面"
+
+[node name="ButtonSFXComponent" type="Node" parent="Panel/HBoxContainer/VBoxContainer/MainButton"]
+script = ExtResource("3_xfudq")
+click_sfx = ExtResource("4_obmxm")
+hover_sfx = ExtResource("5_jlxr7")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="Label2" type="Label" parent="Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.40283203, 0.42905807, 0.4296875, 1)
+theme_override_font_sizes/font_size = 41
+text = "关键词记录栏"
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -345.0
+offset_top = 28.0
+offset_right = -48.0
+offset_bottom = 318.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_vw0mm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gc6ge")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bwhy6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_8th6t")
+theme_override_styles/focus = SubResource("StyleBoxTexture_i5bf0")
+
+[node name="ButtonSFXComponent" type="Node" parent="Panel/CloseButton"]
+script = ExtResource("3_xfudq")
+click_sfx = ExtResource("4_obmxm")
+hover_sfx = ExtResource("5_jlxr7")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="setting" parent="." instance=ExtResource("3_4l0at")]
+visible = false
+layout_mode = 1

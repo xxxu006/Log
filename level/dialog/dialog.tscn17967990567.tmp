@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dorxqy12sfnqe"]
+
+[ext_resource type="Script" uid="uid://b7peffe7qasmn" path="res://level/dialog.gd" id="1_1kary"]
+
+[node name="dialog" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 679.0
+offset_bottom = 680.0
+script = ExtResource("1_1kary")
+dialogue_lines = Array[String](["你好，欢[迎来到/]这个世界！", "这里有一些重要的[关/]需要你了解。", "记住要收集所有的[关/]。"])
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1446.0
+offset_top = 831.0
+offset_right = 1486.0
+offset_bottom = 901.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 73.0
+offset_right = 930.0
+offset_bottom = 781.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

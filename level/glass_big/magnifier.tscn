@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd6epyupw3ihl"]
+
+[ext_resource type="Texture2D" uid="uid://kx6d34bfn8e8" path="res://asset/小道具/放大镜.png" id="1_a46dg"]
+[ext_resource type="Script" uid="uid://cb883gnuyrvv5" path="res://level/glass_big/magnifier.gd" id="2_li6fi"]
+[ext_resource type="Material" uid="uid://b2ur23p0mpw0v" path="res://level/glass_big/magnify_shader_material.tres" id="3_mjwfq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_atvum"]
+radius = 198.0
+height = 394.0
+radial_segments = 4
+
+[node name="magnifier" type="Sprite2D"]
+texture = ExtResource("1_a46dg")
+script = ExtResource("2_li6fi")
+
+[node name="Glass" type="MeshInstance2D" parent="."]
+material = ExtResource("3_mjwfq")
+position = Vector2(-34.999977, -35)
+scale = Vector2(0.38083127, 0.3817713)
+mesh = SubResource("SphereMesh_atvum")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -449.0
+offset_top = -450.0
+offset_right = -149.0
+offset_bottom = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_a46dg")

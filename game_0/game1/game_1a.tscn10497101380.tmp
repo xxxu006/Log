@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://c81o2vgj67swa"]
+
+[ext_resource type="Script" uid="uid://co60udktf52u5" path="res://game_0/game1/track_1.gd" id="1_6jrx4"]
+[ext_resource type="Script" uid="uid://cbhklbvfi0olk" path="res://game_0/game1/cursor.gd" id="1_b0e3b"]
+[ext_resource type="Script" uid="uid://b1hnw5a7e3v8k" path="res://game_0/game1/track_2.gd" id="2_4rt0p"]
+
+[sub_resource type="GDScript" id="GDScript_a3bdt"]
+script/source = "extends Node2D
+
+signal game_failed(reason: String)
+
+@onready var track1: Node2D = $Track1
+@onready var track2: Node2D = $Track2
+@onready var cursor: Area2D = $Cursor
+@onready var preview: Node2D = $Preview
+
+var game_over := false
+
+func _ready() -> void:
+	track1.connect(\"seq_failed\", _on_track1_seq_failed)
+	track2.connect(\"hit_mark_failed\", _on_track2_mark_failed)
+	track2.connect(\"click_non_mark_failed\", _on_track2_click_non_mark_failed)
+	cursor.connect(\"item_entered_track1\", _on_cursor_item_entered_track1)
+	cursor.connect(\"item_entered_track2\", _on_cursor_item_entered_track2)
+
+func _on_track1_seq_failed(msg: String) -> void:
+	_emit_fail(\"轨道一顺序错误: %s\" % msg)
+
+func _on_track2_mark_failed() -> void:
+	_emit_fail(\"轨道二命中标记图像\")
+
+func _on_track2_click_non_mark_failed() -> void:
+	_emit_fail(\"轨道二点击了非标记图像\")
+
+func _on_cursor_item_entered_track1(item: Node) -> void:
+	if game_over:
+		return
+	if item and item.has_method(\"on_reach_cursor_track1\"):
+		item.on_reach_cursor_track1()
+
+func _on_cursor_item_entered_track2(item: Node) -> void:
+	if game_over:
+		return
+	if preview and preview.has_method(\"show_item_texture\"):
+		preview.call(\"show_item_texture\", item)
+	if item and item.has_method(\"on_reach_cursor_track2\"):
+		item.on_reach_cursor_track2()
+
+func _emit_fail(reason: String) -> void:
+	if game_over:
+		return
+	game_over = true
+	emit_signal(\"game_failed\", reason)
+	get_tree().paused = true
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jrx4"]
+
+[node name="game_1a" type="Node2D"]
+script = SubResource("GDScript_a3bdt")
+
+[node name="Track1" type="Node2D" parent="."]
+script = ExtResource("1_6jrx4")
+
+[node name="Track2" type="Node2D" parent="."]
+script = ExtResource("2_4rt0p")
+
+[node name="Cursor" type="Area2D" parent="."]
+script = ExtResource("1_b0e3b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+position = Vector2(268.99997, 251.99998)
+scale = Vector2(-2.3793457, 102.19152)
+shape = SubResource("RectangleShape2D_6jrx4")
+
+[node name="Preview" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Preview"]

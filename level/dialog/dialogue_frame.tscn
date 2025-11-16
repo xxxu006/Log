@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc1bxnyixuf7f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3skd"]
+bg_color = Color(0.4758911, 0.51537323, 0.5390625, 0.45882353)
+border_color = Color(0.8600014, 1.0210065, 1.2127175, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+anti_aliasing_size = 0.22
+
+[node name="DialogueFrame" type="PanelContainer"]
+offset_left = 375.0
+offset_top = 90.0
+offset_right = 415.0
+offset_bottom = 130.0
+scale = Vector2(13.270127, 18.908936)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_e3skd")

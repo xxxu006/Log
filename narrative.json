@@ -1,0 +1,344 @@
+{
+  "start_game": [
+	{ "type": "condition", "check": "cycle", "value": 1, "target": "opening_A" },
+	{ "type": "condition", "check": "cycle", "value": 2, "target": "opening_B" },
+	{ "type": "condition", "check": "cycle", "value": 3, "target": "opening_C" },
+	{ "type": "goto", "event": "opening_A" } 
+  ],
+
+  "opening_A": [
+	{ "type": "dialogue", "speaker": "Patient", "text": "你好，医生" },
+	{ "type": "dialogue", "speaker": "Player", "text": "你好，怎么称呼？" },
+	{ "type": "dialogue", "speaker": "Patient", "text": "我姓A。" },
+	{ "type": "dialogue", "speaker": "Player", "text": "好的A小姐，有什么我能帮你？" },
+	{ "type": "dialogue", "speaker": "Patient", "text": "我感觉很不对劲医生，今年是我毕业的第五年，我的生活却好像在开始工作的那年【停滞】了，我感觉不到时间的【流逝】。"},
+	{ "type": "dialogue", "speaker": "System", "text": "标亮的词语是了解患者症结的关键信息，可以点击继续提问，有用的关键词会引出更多关键信息。请注意，患者的耐心有限，每一次提问都会消耗次数。请尽量在更少的提问中推理出关键问题。"},
+	{ "type": "goto", "event": "opening_A_resume" }
+  ],
+  "opening_A_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"停滞": "event_1_2",
+		"流逝": "distractor_liushi"
+	  }
+	}
+  ],
+  "distractor_liushi": [
+	{ "type": "dialogue", "speaker": "Player", "text": "时间流逝…没有什么事情让您感觉时光飞逝吗？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "毕业算吗？想起来还像是昨天的事，真的已经五年了吗，我总感觉刚刚搬出那个宿舍。医生，其实我们宿舍感情很好，但是毕业到现在好像一面都没有再见。大家都有工作，这也是难免的。"},
+	{ "type": "goto", "event": "opening_A_resume" }
+  ],
+
+
+  "event_1_2": [
+	{ "type": "dialogue", "speaker": "System", "text": "很好，已经收集到了一个有用的关键词，可以在文件夹里查看关键词收集进度。收集完成可进入治疗环节"},
+	{ "type": "dialogue", "speaker": "Player", "text": "停滞？可以具体描述一下吗，什么样的行为会使你产生这种感觉？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "我想不出什么特别的，【生活】算一种行为吗？连续的生活片段算行为吗？起床，洗漱，地铁，打卡，上午的飞书待办，难吃的【外卖】,咖啡，绩效表，功能饮料，绩效表，组会，地铁…这是一个循环，我的每一个白天，每一个夜晚…白天，夜晚…"},
+	{ "type": "action", "do": "show_bug_visual", "params": {"bug_id": "bug_3_1"} },
+	{ "type": "dialogue", "speaker": "System", "text": "患者身上似乎出现了一些变化，可以使用透镜观察，当然，这也会消耗患者的耐心。"},
+	{ "type": "action", "do": "enable_bug_click", "params": {"bug_id": "bug_3_1", "next_event": "observe_bug3_1"} },
+	{ "type": "goto", "event": "event_1_2_resume" }
+  ],
+  "event_1_2_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"生活": "event_life_coffee",
+		"外卖": "distractor_waimai"
+	  }
+	}
+  ],
+  "distractor_waimai": [
+	{ "type": "dialogue", "speaker": "Player", "text": "难吃的外卖？别担心，我来给你推荐几家医生都在吃的精选外卖好店"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "呃。。。谢谢你，这和我的病有关吗？"},
+	{ "type": "dialogue", "speaker": "Player", "text": "当然！美味的食物有助于身心健康"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "…….."},
+	{ "type": "goto", "event": "event_1_2_resume" }
+  ],
+
+  "observe_bug3_1": [
+	{ "type": "action", "do": "disable_bug_click", "params": {"bug_id": "bug_3_1"} },
+	{ "type": "dialogue", "speaker": "Patient", "text": "医生你在看什么？我的脸上有东西吗，那不是黑眼圈，是我的眼影。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "A小姐，你会在眼镜上画录像带吗？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "…虽然我会在片场工作，但是也没有热爱到这种程度吧。有人说电影是梦工厂，但我认为电影工业完全是碎梦车间。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "我还挺喜欢看电影的，为什么这样说？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "你能理解吗医生？一个一个毫无意义的分镜，组合起来就是一个让人落泪的故事，其实宏伟的瞬间也不过是生活的一瞬，而那些重复的日常是不会出现在荧幕上的。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "现实中大家的生活都是【无意义的分镜】，滚滚向前的碎片，但不会有人来剪辑它，组装它。"},
+	{ "type": "action", "do": "hide_bug_visual", "params": {"bug_id": "bug_3_1"} },
+	{ "type": "goto", "event": "observe_bug3_1_resume" }
+  ],
+  "observe_bug3_1_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"无意义的分镜": "event_1_3"
+	  }
+	}
+  ],
+
+  "event_life_coffee": [
+	{ "type": "dialogue", "speaker": "Player", "text": "A小姐，你好像对日常生活感到悲观，这是为什么？" },
+	{ "type": "dialogue", "speaker": "Patient", "text": "悲观吗？我感觉我还挺积极的，为了赶上早上八点零三分进站的地铁我每天都七点钟准时起床，实习生泼上【咖啡】的文件也都在好好补救。嗯？实习生每天都泼咖啡在【分镜】表吗上…等等，这个实习生好像五年前就在实习了，怎么还没有转正，好奇怪…"},
+
+	{ "type": "goto", "event": "event_life_coffee_resume" }
+  ],
+  "event_life_coffee_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"咖啡": "event_coffee",
+		"分镜": "event_fenjing"
+	  }
+	}
+  ],
+
+  "event_fenjing": [
+	{ "type": "action", "do": "disable_bug_click", "params": {"bug_id": "bug_3_1"} },
+	{ "type": "dialogue", "speaker": "Player", "text": "分镜表？您的工作是和影像相关吗"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "没错，有人说电影是梦工厂，但我认为电影工业完全是碎梦车间。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "我还挺喜欢看电影的，为什么这样说？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "你能理解吗医生？一个一个毫无意义的分镜，组合起来就是一个让人落泪的故事，其实宏伟的瞬间也不过是生活的一瞬，而那些重复的日常是不会出现在荧幕上的。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "现实中大家的生活都是【无意义的分镜】，滚滚向前的碎片，但不会有人来剪辑它，组装它。"},
+	{ "type": "goto", "event": "event_fenjing_resume" }
+  ],
+  "event_fenjing_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"无意义的分镜": "event_1_3"
+	  }
+	}
+  ],
+
+  "event_coffee": [
+	{ "type": "action", "do": "disable_bug_click", "params": {"bug_id": "bug_3_1"} },
+	{ "type": "dialogue", "speaker": "Player", "text": "每天都弄洒咖啡？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "没错，每天下午三点我都会点一杯….我好像有点咖啡因成瘾，大概是从大学开始，那时生活费不多，就点十几块的果味美式。也挺好喝的，和小甜水一样，实习的时候一天三杯，这么算来好像也不便宜。从某一个发觉自己脱发的清晨开始，我就再也不点含糖的咖啡了。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "这么说来，好想把那些喝小甜水的日子【剪掉】，就像剪掉时间线上多余的重复帧…如果没喝那么多糖浆，我现在血糖肯定会健康很多。"},
+	{ "type": "goto", "event": "event_coffee_resume" }
+  ],
+  "event_coffee_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"剪掉": "event_cut_check",
+		"_choices": [
+		  {"text": "血糖的问题", "target": "event_sugar"}
+		]
+	  }
+	}
+  ],
+
+  "event_cut_check": [
+	{ "type": "action", "do": "show_bug_visual", "params": {"bug_id": "bug_3_3"} },
+	{ "type": "dialogue", "speaker": "Player", "text": "你提到了剪辑，如果把那些重复的日常剪掉，你停滞的时间会不会流淌起来？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "…没错，只要把那些没用的时间都剪掉，我就可以快乐的活着。如果每一秒都像新的一样，我就不会被日复一日的生活折磨了！"},
+	{ "type": "action", "do": "flash_screen" },
+	{ "type": "action", "do": "goto_minigame", "params": {"scene": "res://game_0/game1/game_1a.tscn","minigame_id": "A"} }
+
+  ],
+  "_comment": "Minigame要发出minigame_A_success或minigame_A_failure", 
+  "event_sugar": [
+	{ "type": "dialogue", "speaker": "Player", "text": "既然你有血糖问题，有没有可能这些都是糖化的神经产生的错觉？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "是脑子的问题啊，我就知道，现在我是不是可以拿到一份让我带薪休假的诊疗单了？"},
+	{ "type": "dialogue", "speaker": "Player", "text": "这可不好说，你要先去一趟化验科。"},
+	{ "type": "action", "do": "show_bug_visual", "params": {"bug_id": "bug_3_3"} },
+	{ "type": "dialogue", "speaker": "Patient", "text": "别再关心血糖了，我的老朋友，真正的答案往往没那么科学。" },
+	{ "type": "dialogue", "speaker": "Player", "text": "老朋友？等等…" },
+	{ "type": "goto", "event": "loop_2" }
+  ],
+
+  "event_1_3": [
+	{ "type": "dialogue", "speaker": "Player", "text": "A小姐，您刚刚提到无意义的分镜，日常生活对你来说是无意义的吗？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "可以这么说，医生。不仅无意义而且重复，重复的分镜堆积到…我感觉时间已经不走了。如果是在拍电影，我的生活肯定是烂片。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "您不是说好的电影也是由无意义的分镜堆积而成的吗？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "这不一样，医生。如果是电影，所有的分镜都是事先设计好的，有目的的拍摄的，虽然在组合前看似没有意义，但是它们最终会成为有用的一部分。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "而生活不是这样，从【毕业】那天开始，意义，目的，通往终幕的时间轴，好像都被日常磨损了。医生，我被困住了…我一定是被困住了。"},
+	{ "type": "action", "do": "show_bug_visual", "params": {"bug_id": "bug_3_2"} },
+	{ "type": "action", "do": "enable_bug_click", "params": {"bug_id": "bug_3_2", "next_event": "observe_bug3_2"} },
+	{ "type": "goto", "event": "event_1_3_resume" }
+  ],
+  "event_1_3_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"毕业": "distractor_biye_general"
+	  }
+	}
+  ],
+  "distractor_biye_general": [
+	{ "type": "dialogue", "speaker": "Player", "text": "在你看来毕业好像是这一切的起点，为什么会这样想呢？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "你肯定听过那个关于大象的故事。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "哦？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "马戏团里的幼象被锁链锁住右腿，怎么挣扎都无法逃脱，当它长大，已经能轻松挣脱铁链的时候，它却不会再去尝试。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "你的意思是，你就像那头大象一样吗？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "不，这只是个故事。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "毕业不是起点，只是通往下一个房间的门而已。"},
+	{ "type": "goto", "event": "event_1_3_resume" } 
+  ],
+
+  "observe_bug3_2": [
+	{ "type": "action", "do": "disable_bug_click", "params": {"bug_id": "bug_3_2"} },
+	{ "type": "dialogue", "speaker": "Player", "text": "A小姐，你的工牌为什么会变成剪刀？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "可能因为我是一名剪辑师吧。告诉你一个人尽皆知的秘密，其实我很讨厌我的工作，做它是为了五险一金和35元一杯的手冲咖啡。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "医生，你喜欢喝咖啡吗？"},
+	{ "type": "dialogue", "speaker": "Player", "text": "还好，谈不上喜欢，但也不讨厌。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "我好像有点咖啡因成瘾，大概是从大学开始，那时生活费不多，就点十几块的果味美式。也挺好喝的，和小甜水一样，实习的时候一天三杯，这么算来好像也不便宜。从某一个发觉自己脱发的清晨开始，我就再也不点含糖的咖啡了。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "这么说来，好想把那些喝小甜水的日子【剪掉】，就像剪掉时间线上多余的重复帧…如果没有喝那么多糖浆，我现在血糖肯定会健康很多。"},
+
+	{ "type": "goto", "event": "observe_bug3_2_resume" }
+  ],
+  "observe_bug3_2_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"剪掉": "event_1_3_cut"
+	  }
+	}
+  ],
+
+  "event_1_3_cut": [
+	{ "type": "action", "do": "hide_bug_visual", "params": {"bug_id": "bug_3_2"} }, 
+	{ "type": "dialogue", "speaker": "Player", "text": "你提到了剪辑，如果把那些重复的日常剪掉，你停滞的时间会不会流淌起来？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "…没错，只要把那些没用的时间都剪掉，我就可以快乐的活着。如果每一秒都像新的一样，我就不会被日复一日的生活折磨了！"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "不对…那只是遗忘，我只是忘记了重复的痛苦，并不能逃脱这无意义的【循环】，这是自欺欺人，这是自欺欺人…"},
+	{ "type": "dialogue", "speaker": "Player", "text": "冷静一点患者，我明白了，也许我可以帮你。"},
+	{ "type": "goto", "event": "event_1_3_cut_resume" }
+  ],
+  "event_1_3_cut_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"循环": "distractor_cycle",
+		"_choices": [
+		  {"text": "帮她消除痛苦", "target": "event_minigame_A_prep"},
+		  {"text": "寻找痛苦的根源", "target": "event_1_4_root"}
+		]
+	  }
+	}
+  ],
+  "distractor_cycle": [
+	{ "type": "dialogue", "speaker": "System", "text": "(她提到了循环...我应该怎么做？)"},
+	{ "type": "goto", "event": "event_1_3_cut_resume" }
+  ],
+
+  "event_minigame_A_prep": [
+	{ "type": "dialogue", "speaker": "System", "text": "(医疗机器已准备就绪，点击医疗机器开始治疗...)  提示：把颠倒的时间排列好顺序，消除需要被剪去的时间。" },
+	{ "type": "action", "do": "goto_minigame", "params": {"scene": "res://game_0/game1/game_1a.tscn","minigame_id": "A"} }
+  ],
+
+  "event_1_4_root": [
+	{ "type": "dialogue", "speaker": "Player", "text": "时间的流速不可更改，但时间也是人们设定的。A小姐，是你认为它循环它才开始循环，也许你需要改变。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "改变…这真的…只是我的臆想吗?"},
+	{ "type": "action", "do": "show_bug_visual", "params": {"bug_id": "bug_3_3"} },
+	{ "type": "dialogue", "speaker": "Patient", "text": "不对…现实肯定也有问题，我不可能连续五年填同一份绩效单，不不可能给同一部电影剪了300条一模一样的短视频，不可能1500天做同一班地铁——八点零三分进站！不可能有一个实习了五年的实习生每天都把咖啡洒在分镜单上…等等，那个实习生怎么和我一模一样！"},
+	{ "type": "dialogue", "speaker": "Player", "text": "A小姐，冷静下来，那不可能是你！"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "那是我…不!那不是我!那是五年前的我？医生，时间是一个环吗？未来真的存在吗？什么是结局？帮帮我医生，帮我剪掉过去的我，只留下一个，只留下【当下】的这个…"},
+	{ "type": "goto", "event": "event_1_4_root_resume" }
+  ],
+  "event_1_4_root_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"当下": "event_minigame_B_start"
+	  }
+	}
+  ],
+
+
+  "event_minigame_B_start": [
+	 { "type": "dialogue", "speaker": "System", "text": "(医疗机器已准备就绪，点击医疗机器开始治疗...)  提示：把分割颠倒的时间排列好顺序放在人生的第一轨道，消除需要被剪去的时间。" },
+	 { "type": "action", "do": "goto_minigame", "params": {"scene": "res://game_0/game1/game_1b.tscn","minigame_id": "B"} }
+  ],
+
+  "opening_B": [
+	{ "type": "dialogue", "speaker": "Patient", "text": "你好，医生"},
+	{ "type": "dialogue", "speaker": "Player", "text": "你好，A小姐,我们认识吗" }, 
+	{ "type": "dialogue", "speaker": "Patient", "text": "哦？" },
+	{ "type": "dialogue", "speaker": "Player", "text": "咳咳，有什么我能帮你？" },
+	{ "type": "dialogue", "speaker": "Patient", "text": "…我感觉很不对劲,医生，今年是我毕业的第五年，我的生活却好像在开始工作的那年【停滞】了，我感觉不到….."},
+	{ "type": "dialogue", "speaker": "Player", "text": "没问题，我可以帮你。你这话...听着有些耳熟。" }, 
+	{ "type": "goto", "event": "opening_B_resume" }
+  ],
+  "opening_B_resume": [
+	{
+	  "type": "map_keywords",
+	  "map": {
+		"停滞": "event_1_2_cycle2"
+	  }
+	}
+  ],
+  "event_1_2_cycle2": [
+	{ "type": "dialogue", "speaker": "Player", "text": "停滞？可以具体描述一下吗，什么样的行为会使你产生这种感觉？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "我想不出什么特别的，【生活】算一种行为吗？连续的生活片段算行为吗？起床，洗漱，地铁，打卡，上午的飞书待办，难吃的【外卖】,咖啡，绩效表，功能饮料，绩效表，组会，地铁…这是一个循环，我的每一个白天，每一个夜晚…白天，夜晚…"},
+	{ "type": "action", "do": "show_bug_visual", "params": {"bug_id": "bug_3_1"} },
+	{ "type": "dialogue", "speaker": "System", "text": "患者身上似乎出现了一些变化，可以使用透镜观察，当然，这也会消耗患者的耐心。"},
+	{ "type": "action", "do": "enable_bug_click", "params": {"bug_id": "bug_3_1", "next_event": "observe_bug3_1"} },
+	{ "type": "goto", "event": "event_1_2_resume" }
+  ],
+
+  "opening_C": [
+	{ "type": "dialogue", "speaker": "Player", "text": "你好，A小姐"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "哦？"},
+	{ "type": "dialogue", "speaker": "Player", "text": "咳咳，有什么我能帮你？"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "…我感觉很不对劲,医生，今年是我毕业的第五年，我的生活却好像在开始工作的那年停滞了，我感觉不到时间的流逝。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "我听说您很会治疗一些疑难杂症，如果可以…"},
+	{ "type": "dialogue", "speaker": "Player", "text": "没问题，我可以帮你。"},
+	{ "type": "dialogue", "speaker": "System", "text": "好强的既视感，我好像知道她的问题…"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "谢谢你医生…在你身上我有一种莫名的安全感。"},
+	{ "type": "dialogue", "speaker": "Player", "text": "我们开始治疗吧。"},
+	{ "type": "dialogue", "speaker": "Patient", "text": "嗯？"},
+	{ "type": "action", "do": "goto_minigame", "params": {"scene": "res://game_0/game1/game_1b.tscn","minigame_id": "B"} }
+  ],
+
+
+  "_comment_loops_and_endings": "循环、结局、小游戏回调",
+  "minigame_A_success": [ { "type": "goto", "event": "ending_A" } ], 
+  "minigame_A_failure": [ { "type": "goto", "event": "loop_2" } ],
+
+  "minigame_B_success": [ { "type": "goto", "event": "ending_B" } ], 
+  "minigame_B_failure": [ { "type": "goto", "event": "loop_3" } ], 
+
+
+
+  "ending_A": [
+	{ "type": "action", "do": "reset_points" },
+	{ "type": "dialogue", "speaker": "System", "text": "一切都结束了，那些奇怪的噪点和重影都已经消失，你面前的病人恢复了平静，她现在看起来只是一名富有专业素养、值得信赖的公司职员…真的吗？她眼睛里的平静如此深邃，深邃到你几乎认为那是一双虫洞，而它另一端连接着的，是世界近无无尽的、恐怖的虚无。你怔怔的看着她，直到她站起身，感激而温和的与你握手道别，离开诊室。在她身影消失的瞬间，你好像又看到了那些重影—虽然只是一瞬间。当晚，你怀揣着困惑和不安入眠，而当你再次睁开眼睛，你看到了….."},
+	{ "type": "goto", "event": "loop_2" }
+  ],
+  "ending_B": [
+	{ "type": "dialogue", "speaker": "System", "text": "一切都结束了…？你握着A小姐的手，她仍在颤抖，但那些重影已经消失。你感到一种迷茫正从她的身上向你蔓延，人是由过去和记忆构成的，又在不断遗忘中成长，这是一种成长吗？又或者只是一种逃避？A小姐终于抬起了头，你看到她的脸上有一种释然的微笑，起码在现在，她挣脱了那些记忆纠缠成的痛苦。" },
+	{ "type": "action", "do": "goto_minigame", "params": {"scene": "res://level/mainUI/main_menu.tscn","minigame_id": "C"} }
+  ],
+
+  "loop_2": [
+	{ "type": "dialogue", "speaker": "System", "text": "（循环进入第二阶段...）" },
+	{ "type": "action", "do": "set_cycle", "params": { "cycle": 2 } },
+	{ "type": "action", "do": "reload_exploration_hub" }
+  ],
+  "loop_3": [
+	{ "type": "dialogue", "speaker": "System", "text": "（循环进入第三阶段...）" },
+	{ "type": "action", "do": "set_cycle", "params": { "cycle": 3 } },
+	{ "type": "action", "do": "reload_exploration_hub" }
+  ],
+
+  "failure_ending": [ 
+	{ "type": "dialogue", "speaker": "System", "text": "（行动次数耗尽...）"},
+	{ "type": "dialogue", "speaker": "System", "text": "（治疗失败。）" },
+	{ "type": "action", "do": "goto_minigame", "params": {"scene": "res://level/mainUI/main_menu.tscn","minigame_id": "C"} }
+  ],
+
+  "_comment_global_distractors": "全局干扰项",
+  "global_distractor_default": [ 
+	{ "type": "dialogue", "speaker": "System", "text": "（这个词似乎没什么帮助...）" },
+	{ "type": "goto", "event": "global_resume_handler" }
+  ],
+  "global_distractor_magnifier_fail": [
+	{ "type": "dialogue", "speaker": "Patient", "text": "医生？我身上有什么东西吗？" },
+	{ "type": "goto", "event": "global_resume_handler" }
+  ],
+  "global_resume_handler": [
+	{ "type": "condition", "check": "resume_last_event" }
+  ]
+}

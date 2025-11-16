@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyunldkrvk3fa"]
+
+[ext_resource type="Script" uid="uid://dktyaxyf7rlo5" path="res://game_0/game1/game_1b.gd" id="1_ijfcu"]
+[ext_resource type="Texture2D" uid="uid://cxtw24yybm47c" path="res://asset/场景/24a6c4129a7a644a1728c2af753d01b2.png" id="2_12p6b"]
+[ext_resource type="PackedScene" uid="uid://225wadthurgl" path="res://game_0/game1/spwan/spawn_12.tscn" id="2_jgye3"]
+[ext_resource type="PackedScene" uid="uid://cnc6v3bxd22b0" path="res://game_0/game1/spwan/spawn_2.tscn" id="3_12p6b"]
+[ext_resource type="Script" uid="uid://bx2h8csvxk6w7" path="res://game_0/game1/back2.gd" id="3_wxyrb"]
+[ext_resource type="PackedScene" uid="uid://r6squ2fgq6al" path="res://game_0/game1/spwan/display_node.tscn" id="4_crmw2"]
+[ext_resource type="PackedScene" uid="uid://d3b1ux85q8ola" path="res://game_0/game1/spwan/spawn_22.tscn" id="5_wxyrb"]
+[ext_resource type="PackedScene" uid="uid://dcs1iinsth57p" path="res://shader/CRT.tscn" id="6_jgye3"]
+[ext_resource type="PackedScene" uid="uid://clw02qwv2ar2p" path="res://game_0/canvas_layer.tscn" id="8_crmw2"]
+
+[node name="game_1b" type="Node2D"]
+script = ExtResource("1_ijfcu")
+
+[node name="C45Fd242e4d28f1e13Baff6914e50756" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1637.0
+offset_bottom = 477.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_12p6b")
+patch_margin_left = 1573
+patch_margin_top = 477
+patch_margin_right = 64
+script = ExtResource("3_wxyrb")
+
+[node name="spawn12" parent="." instance=ExtResource("2_jgye3")]
+
+[node name="spawn2" parent="." instance=ExtResource("3_12p6b")]
+
+[node name="DisplayNode" parent="spawn2" instance=ExtResource("4_crmw2")]
+offset_left = 673.0
+offset_top = 102.00001
+offset_right = 673.0
+offset_bottom = 102.00001
+scale = Vector2(1.584, 1.584)
+metadata/_edit_use_anchors_ = true
+
+[node name="spawn22" parent="." instance=ExtResource("5_wxyrb")]
+
+[node name="CRT" parent="spawn22" instance=ExtResource("6_jgye3")]
+visible = false
+
+[node name="CanvasLayer" parent="." instance=ExtResource("8_crmw2")]
+
+[node name="Control" parent="CanvasLayer" index="0"]
+offset_left = 1061.0
+offset_top = 387.0
+offset_right = 1101.0
+offset_bottom = 427.0
+
+[node name="Label" parent="CanvasLayer/Control" index="0"]
+offset_top = 5.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 40
+
+[editable path="CanvasLayer"]

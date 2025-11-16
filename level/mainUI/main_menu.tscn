@@ -1,0 +1,430 @@
+[gd_scene load_steps=52 format=3 uid="uid://bkqnuvsxooqba"]
+
+[ext_resource type="Script" uid="uid://dagtiwx8oh7vc" path="res://level/mainUI/main_menu.gd" id="1_jfuqh"]
+[ext_resource type="Script" uid="uid://bxt7puq1xw208" path="res://auto_loads/buttonsfxcomponent.gd" id="2_2x6o0"]
+[ext_resource type="Texture2D" uid="uid://btkmb8axutq8q" path="res://asset/场景/背景.jpg" id="2_ue15w"]
+[ext_resource type="Texture2D" uid="uid://21m5qvwjrxu7" path="res://asset/场景/文件夹.png" id="3_vk83p"]
+[ext_resource type="PackedScene" uid="uid://dgoweerypmakt" path="res://level/mainUI/setting.tscn" id="4_r0dqh"]
+[ext_resource type="PackedScene" uid="uid://qbqlsda6w3fs" path="res://shader/colorshake.tscn" id="5_s4gnk"]
+[ext_resource type="Script" uid="uid://b70avn880cd0h" path="res://level/mainUI/button_3.gd" id="6_u8oxb"]
+[ext_resource type="AudioStream" uid="uid://caqqjbjrquon3" path="res://asset/音效/按键音_3.mp3" id="7_hrfdw"]
+[ext_resource type="Script" uid="uid://df864xdd0shfn" path="res://level/mainUI/open_guide_panel.gd" id="7_kdm78"]
+[ext_resource type="Texture2D" uid="uid://k7fm17v41iyx" path="res://level/mainUI/photos/图鉴.png" id="7_xy1a3"]
+[ext_resource type="Texture2D" uid="uid://btav8t8b7u8po" path="res://level/mainUI/photos/open.png" id="8_kdm78"]
+[ext_resource type="Texture2D" uid="uid://dvcexu8kj7bwn" path="res://level/mainUI/photos/default.png" id="8_w4vn7"]
+[ext_resource type="Script" uid="uid://3d6pognxyyxo" path="res://level/mainUI/button_1.gd" id="10_7wkwj"]
+[ext_resource type="Script" uid="uid://yuetlmsmfrc0" path="res://level/mainUI/button_21.gd" id="10_25273"]
+[ext_resource type="AudioStream" uid="uid://8cnj8fqg2w4c" path="res://asset/音效/剪刀_2.mp3" id="10_u8oxb"]
+[ext_resource type="Script" uid="uid://bpb7whje87aa4" path="res://level/mainUI/button.gd" id="11_25273"]
+[ext_resource type="Script" uid="uid://cj3pjael6liak" path="res://level/mainUI/button_2.gd" id="11_jwfsf"]
+[ext_resource type="Texture2D" uid="uid://sjl6tk6up513" path="res://level/mainUI/photos/return_button.png" id="11_l73vm"]
+[ext_resource type="Texture2D" uid="uid://db8vd64pa6kbo" path="res://asset/人物/bug/ending1.png" id="19_dyc7l"]
+[ext_resource type="Texture2D" uid="uid://cn787k4o0tvlq" path="res://asset/人物/bug/ending2.png" id="20_c7fy3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xy1a3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tyymf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsaxp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4gnk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2g3vq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vk83p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ot8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dyc7l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7wkwj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e20a5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ue15w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jwfsf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cc0qh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l73vm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7fy3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lytgj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w4vn7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ayfas"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_25273"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7o3hw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8oxb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_846q0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wi4u4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dakey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qn230"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2elkb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hrfdw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wc5mu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lyq8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0ja4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kdm78"]
+texture = ExtResource("7_xy1a3")
+
+[node name="mainmenu" type="Node"]
+script = ExtResource("1_jfuqh")
+
+[node name="背景" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.17264, 1.22546)
+texture = ExtResource("2_ue15w")
+
+[node name="colorshake" parent="." instance=ExtResource("5_s4gnk")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -659.0
+offset_top = -528.0
+offset_right = 268.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.308003, 1.2254602)
+
+[node name="文件夹" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -488.0
+offset_top = -334.0
+offset_right = -88.0
+offset_bottom = 66.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.17264, 1.22546)
+texture = ExtResource("3_vk83p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 177
+alignment = 1
+
+[node name="Button3" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_font_sizes/font_size = 37
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xy1a3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tyymf")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_vsaxp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_s4gnk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2g3vq")
+text = "退出"
+script = ExtResource("6_u8oxb")
+
+[node name="ButtonSFXComponent" type="Node" parent="HBoxContainer/Button3"]
+script = ExtResource("2_2x6o0")
+click_sfx = ExtResource("7_hrfdw")
+hover_sfx = ExtResource("10_u8oxb")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vk83p")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3ot8e")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_dyc7l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7wkwj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e20a5")
+text = "设置"
+flat = true
+script = ExtResource("10_25273")
+
+[node name="ButtonSFXComponent" type="Node" parent="HBoxContainer/Button2"]
+script = ExtResource("2_2x6o0")
+click_sfx = ExtResource("7_hrfdw")
+hover_sfx = ExtResource("10_u8oxb")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ue15w")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jwfsf")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_cc0qh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l73vm")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_c7fy3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lytgj")
+text = "开始坐诊"
+script = ExtResource("11_25273")
+
+[node name="ButtonSFXComponent" type="Node" parent="HBoxContainer/Button"]
+script = ExtResource("2_2x6o0")
+click_sfx = ExtResource("7_hrfdw")
+hover_sfx = ExtResource("10_u8oxb")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="Button5" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("panel", "close_button", "mask")]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w4vn7")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ayfas")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_25273")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_7o3hw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u8oxb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_846q0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wi4u4")
+text = "病理图鉴"
+script = ExtResource("7_kdm78")
+panel = NodePath("../../Control/GuidePanel")
+close_button = NodePath("../../Control/GuidePanel/TextureButton")
+mask = NodePath("../../Control/ColorRect")
+
+[node name="ButtonSFXComponent" type="Node" parent="HBoxContainer/Button5"]
+script = ExtResource("2_2x6o0")
+click_sfx = ExtResource("7_hrfdw")
+hover_sfx = ExtResource("10_u8oxb")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="Button4" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.698039, 0.745098, 0.835294, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w4vn7")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_dakey")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qn230")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2elkb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hrfdw")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_wc5mu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_lyq8l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l0ja4")
+text = "重新开始"
+
+[node name="ButtonSFXComponent" type="Node" parent="HBoxContainer/Button4"]
+script = ExtResource("2_2x6o0")
+click_sfx = ExtResource("7_hrfdw")
+hover_sfx = ExtResource("10_u8oxb")
+metadata/_custom_type_script = "uid://bxt7puq1xw208"
+
+[node name="setting" parent="." instance=ExtResource("4_r0dqh")]
+visible = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1920.0
+offset_top = 1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_top = -1068.0
+offset_right = 680.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.517647)
+
+[node name="GuidePanel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1359.0
+offset_top = -973.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kdm78")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GuidePanel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = -166.0
+offset_top = 158.0
+offset_right = 71.0
+offset_bottom = 823.0
+theme_override_constants/separation = 19
+
+[node name="Button1" type="TextureButton" parent="Control/GuidePanel/VBoxContainer" node_paths=PackedStringArray("btn", "panel2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("8_kdm78")
+texture_pressed = ExtResource("8_kdm78")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("10_7wkwj")
+dfault = ExtResource("8_w4vn7")
+open = ExtResource("8_kdm78")
+btn = NodePath("../Button2")
+panel2 = NodePath("../Button2/Panel")
+
+[node name="Label" type="Label" parent="Control/GuidePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.83137256, 0.8901961, 0.9098039)
+theme_override_font_sizes/font_size = 42
+text = "结局图鉴"
+horizontal_alignment = 1
+
+[node name="Button2" type="TextureButton" parent="Control/GuidePanel/VBoxContainer" node_paths=PackedStringArray("btn", "panel2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("8_w4vn7")
+texture_pressed = ExtResource("8_kdm78")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("11_jwfsf")
+dfault = ExtResource("8_w4vn7")
+open = ExtResource("8_kdm78")
+btn = NodePath("../Button1")
+panel2 = NodePath("../../Panel")
+
+[node name="Panel" type="Panel" parent="Control/GuidePanel/VBoxContainer/Button2"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 357.0
+offset_top = -263.0
+offset_right = 1330.0
+offset_bottom = 405.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/GuidePanel/VBoxContainer/Button2/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 366.0
+offset_right = 1346.0
+offset_bottom = 947.0
+scale = Vector2(0.6961131, 0.6961131)
+
+[node name="Label" type="Label" parent="Control/GuidePanel/VBoxContainer/Button2/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5493164, 0.6090355, 0.625, 1)
+text = "策划：Nemo 此箱彼箱
+
+文案：Nemo
+
+美术：柏 何西
+
+程序：kalena 此箱彼箱
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/GuidePanel/VBoxContainer/Button2/Panel/HBoxContainer"]
+layout_mode = 2
+text = "          "
+
+[node name="Label2" type="Label" parent="Control/GuidePanel/VBoxContainer/Button2/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54901963, 0.60784316, 0.62352943, 1)
+text = "音效：小西
+
+logo：柏
+
+ui：阿氧 此箱彼箱"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/GuidePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.83137256, 0.8901961, 0.9098039)
+theme_override_colors/font_shadow_color = Color(0.7621765, 0.8671875, 0.84995914, 0)
+theme_override_font_sizes/font_size = 40
+text = "开发人员"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/GuidePanel"]
+layout_mode = 0
+offset_left = -166.0
+offset_top = 647.0
+offset_right = 71.0
+offset_bottom = 647.0
+
+[node name="BoxContainer" type="VBoxContainer" parent="Control/GuidePanel/Panel"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = -190.00003
+offset_right = 3319.0
+offset_bottom = 1426.0
+scale = Vector2(0.315, 0.315)
+
+[node name="Ending1" type="TextureButton" parent="Control/GuidePanel/Panel/BoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("20_c7fy3")
+
+[node name="Label" type="Label" parent="Control/GuidePanel/Panel/BoxContainer/Ending1"]
+layout_mode = 0
+offset_left = 1546.0316
+offset_top = 168.25397
+offset_right = 2964.0317
+offset_bottom = 577.25397
+theme_override_colors/font_color = Color(0.59628296, 0.630007, 0.65234375, 1)
+theme_override_font_sizes/font_size = 300
+text = "ENDing  A"
+
+[node name="Ending2" type="TextureButton" parent="Control/GuidePanel/Panel/BoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("19_dyc7l")
+
+[node name="Label2" type="Label" parent="Control/GuidePanel/Panel/BoxContainer/Ending2"]
+layout_mode = 0
+offset_left = 1558.7301
+offset_top = 224.92047
+offset_right = 2976.73
+offset_bottom = 633.9205
+theme_override_colors/font_color = Color(0.59628296, 0.630007, 0.65234375, 1)
+theme_override_font_sizes/font_size = 300
+text = "ENDing  B"
+
+[node name="TextureButton" type="TextureButton" parent="Control/GuidePanel"]
+layout_mode = 0
+offset_left = 1091.0
+offset_top = 25.0
+offset_right = 1339.0
+offset_bottom = 275.0
+texture_normal = ExtResource("11_l73vm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="pressed" from="HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

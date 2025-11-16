@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2c5itdiw5rgq"]
+
+[ext_resource type="Script" uid="uid://6ndo5rf5s3e7" path="res://level/scenes/exploration_hub.gd" id="1_iqsqa"]
+[ext_resource type="Texture2D" uid="uid://pohjdbakc0rc" path="res://asset/场景/Screenshot 2025-10-12 204409.png" id="2_oey3s"]
+[ext_resource type="PackedScene" uid="uid://brmmirf8s0mwj" path="res://level/mainUI/pausemenu.tscn" id="4_npgxt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqsqa"]
+
+[node name="ExplorationHub" type="Node2D"]
+script = ExtResource("1_iqsqa")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(2.9757738, 2.9757738)
+texture = ExtResource("2_oey3s")
+
+[node name="DialogueFrame" type="PanelContainer" parent="."]
+offset_left = 261.0
+offset_top = 110.0
+offset_right = 301.0
+offset_bottom = 150.0
+scale = Vector2(16.714973, 19.800203)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_iqsqa")
+
+[node name="InGameUI" type="CanvasLayer" parent="."]
+
+[node name="ProgressLabel" type="Label" parent="InGameUI"]
+offset_left = 216.0
+offset_top = 928.0
+offset_right = 256.0
+offset_bottom = 998.0
+
+[node name="CharacterAnchor" type="Node2D" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_npgxt")]
+visible = false

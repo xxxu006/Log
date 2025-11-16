@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://clw02qwv2ar2p"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 70.0
+
+[node name="Timer" type="Timer" parent="Control"]

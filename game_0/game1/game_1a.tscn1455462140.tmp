@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbg6r7cnvah3q"]
+
+[ext_resource type="PackedScene" uid="uid://g4uxcm7it72g" path="res://game_0/game1/spwan/spawn_1.tscn" id="1_6jrx4"]
+[ext_resource type="Script" uid="uid://bci5yu2ly3rcd" path="res://game_0/game1/game_1a.gd" id="1_e1all"]
+[ext_resource type="PackedScene" uid="uid://cnc6v3bxd22b0" path="res://game_0/game1/spwan/spawn_2.tscn" id="2_4rt0p"]
+[ext_resource type="Texture2D" uid="uid://cxtw24yybm47c" path="res://asset/场景/24a6c4129a7a644a1728c2af753d01b2.png" id="2_sx0ji"]
+[ext_resource type="PackedScene" uid="uid://r6squ2fgq6al" path="res://game_0/game1/spwan/display_node.tscn" id="4_e1all"]
+[ext_resource type="PackedScene" uid="uid://dcs1iinsth57p" path="res://shader/CRT.tscn" id="5_fvjhh"]
+[ext_resource type="PackedScene" uid="uid://clw02qwv2ar2p" path="res://game_0/canvas_layer.tscn" id="7_xe0hg"]
+[ext_resource type="PackedScene" uid="uid://c1rtfs35bpn2s" path="res://game_0/tutorial_ui.tscn" id="8_gy500"]
+
+[node name="game_1a" type="Node2D"]
+script = ExtResource("1_e1all")
+
+[node name="C45Fd242e4d28f1e13Baff6914e50756" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0000786, 1.0000786)
+texture = ExtResource("2_sx0ji")
+
+[node name="spawn1" parent="." instance=ExtResource("1_6jrx4")]
+lane_y = 0.0
+card_width = 300.0
+card_height = 225.0
+spawn_interval_range = Vector2(0.35, 0.9)
+spawn_chance = 0.85
+max_cards_on_lane = 12
+right_margin = 200.0
+left_despawn_x = -600.0
+
+[node name="spawn2" parent="." instance=ExtResource("2_4rt0p")]
+move_speed = 150.0
+
+[node name="DisplayNode" parent="spawn2" instance=ExtResource("4_e1all")]
+offset_left = 773.0
+offset_top = 56.000004
+offset_right = 773.0
+offset_bottom = 56.000004
+scale = Vector2(2.045, 2.045)
+metadata/_edit_use_anchors_ = true
+
+[node name="CRT" parent="spawn2" instance=ExtResource("5_fvjhh")]
+visible = false
+
+[node name="CanvasLayer" parent="." instance=ExtResource("7_xe0hg")]
+
+[node name="Control" parent="CanvasLayer" index="0"]
+modulate = Color(1, 1, 1, 0.76862746)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -51.0
+offset_right = 421.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" parent="CanvasLayer/Control" index="0"]
+offset_top = 8.0
+offset_bottom = 78.0
+scale = Vector2(0.76, 0.76)
+
+[node name="TutorialUI" parent="CanvasLayer" instance=ExtResource("8_gy500")]
+visible = false
+
+[editable path="CanvasLayer"]

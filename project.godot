@@ -1,0 +1,62 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="病理日志"
+run/main_scene="uid://b0wjhtd7p7w70"
+config/features=PackedStringArray("4.5", "Mobile")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="uid://b66m4qop20hcv"
+
+[audio]
+
+buses/default_bus_layout="res://auto_loads/default_bus_layout.tres"
+
+[autoload]
+
+Loadmanager="*res://auto_loads/loadmanager.gd"
+Gamemanager="*res://auto_loads/gamemanager.gd"
+Jsonload="*res://auto_loads/jsonload.gd"
+NarrativeManager="*res://auto_loads/NarrativeManager.gd"
+Endload="*res://level/endload/endload.gd"
+Global="*res://auto_loads/global.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=1
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom="uid://qtfj23e38sl7"
+theme/custom_font="uid://6qw75073405"
+
+[input]
+
+mouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(413, 21),"global_position":Vector2(422, 69),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

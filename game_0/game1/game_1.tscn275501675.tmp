@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0aanke728afo"]
+
+[ext_resource type="Script" uid="uid://dqhw3i0eqojk3" path="res://game_0/game_1.gd" id="1_7irw6"]
+[ext_resource type="Texture2D" uid="uid://jfsbophnp6w1" path="res://原始/73acb0adf85641a047164edd40c4fd58.jpg" id="2_ibhng"]
+[ext_resource type="Texture2D" uid="uid://dyowb3jeafjml" path="res://shader/dialog box medium.png" id="3_q575a"]
+[ext_resource type="Texture2D" uid="uid://oya8wpn6jmc8" path="res://icon.svg" id="4_xv8vu"]
+[ext_resource type="Script" uid="uid://bvmgbjml0v0k7" path="res://game_0/curse.gd" id="5_3515h"]
+
+[sub_resource type="Shader" id="Shader_t3b1j"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydm4t"]
+shader = SubResource("Shader_t3b1j")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fks45"]
+size = Vector2(131.3982, 116.12358)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_t3b1j"]
+a = Vector2(0, -53.29538)
+b = Vector2(0, 55.11743)
+
+[node name="game_1" type="Node"]
+script = ExtResource("1_7irw6")
+
+[node name="73Acb0Adf85641a047164Edd40c4Fd58" type="Sprite2D" parent="."]
+position = Vector2(874, 632.4999)
+scale = Vector2(2.5694447, 2.3064811)
+texture = ExtResource("2_ibhng")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Bar" type="Sprite2D" parent="Node2D"]
+position = Vector2(1953.5, 519)
+scale = Vector2(27.42969, 4.8750005)
+texture = ExtResource("3_q575a")
+
+[node name="Icon4" type="Sprite2D" parent="Node2D/Bar"]
+material = SubResource("ShaderMaterial_ydm4t")
+use_parent_material = true
+position = Vector2(-15.986326, 17.1282)
+scale = Vector2(0.11449725, 0.55929494)
+texture = ExtResource("4_xv8vu")
+
+[node name="Area2D" type="Area2D" parent="Node2D/Bar/Icon4"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Bar/Icon4/Area2D"]
+position = Vector2(2.2653198, -1.3196411)
+scale = Vector2(1, 1.0000005)
+shape = SubResource("RectangleShape2D_fks45")
+
+[node name="Curse0" type="Sprite2D" parent="Node2D"]
+position = Vector2(847, 533)
+scale = Vector2(0.1328125, 4.390625)
+texture = ExtResource("4_xv8vu")
+
+[node name="Curse" type="Area2D" parent="."]
+script = ExtResource("5_3515h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Curse"]
+position = Vector2(847, 533)
+scale = Vector2(0.1328125, 4.390625)
+shape = SubResource("SegmentShape2D_t3b1j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
